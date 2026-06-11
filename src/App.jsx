@@ -824,8 +824,7 @@ export default function KoreanMealPlanner(){
           {manualMeal?(
             <div style={card}>
               <div style={{fontWeight:700,marginBottom:8}}>{"Grocery List ("+manualMeal.grocery.length+")"}</div>
-              <GroceryChecklist items={manualMeal.grocery}/>
-              <button style={Object.assign({},btnGhost,{marginTop:10})} onClick={()=>copyList(manualMeal.grocery)}>{copied?"Copied":"Copy"}</button>
+              <GroceryChecklist items={manualMeal.grocery} showExport={true}/>
             </div>
           ):null}
         </div>
