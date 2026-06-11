@@ -744,16 +744,6 @@ export default function KoreanMealPlanner(){
         </div>
       ))}
       <MealVisual mealData={mealData}/>
-      <div style={{marginTop:12,display:"flex",gap:8,flexWrap:"wrap"}}>
-        <button style={btnGreen} onClick={()=>setShowGrocery(p=>!p)}>{showGrocery?"Hide Grocery List":"Grocery List"}</button>
-        {showGrocery?<button style={btnGhost} onClick={()=>copyList(mealData.grocery)}>{copied?"Copied":"Copy"}</button>:null}
-      </div>
-      {showGrocery?(
-        <div style={{marginTop:10,background:"#f8f5f0",borderRadius:10,padding:12}}>
-          <div style={Object.assign({},sLabel,{marginBottom:8})}>{"Ingredients: "+mealData.grocery.length}</div>
-          <GroceryChecklist items={mealData.grocery}/>
-        </div>
-      ):null}
     </div>
   );
 
@@ -785,6 +775,21 @@ export default function KoreanMealPlanner(){
             <button style={btnPrimary} onClick={generateMeal}>{"Generate Today's Meal"}</button>
           </div>
           {meal?<MealResult mealData={meal}/>:null}
+          {meal?(
+            <div style={Object.assign({},card,{textAlign:"center"})}>
+              <button style={Object.assign({},btnGreen,{justifyContent:"center",width:"100%",marginBottom:showGrocery?12:0})} onClick={()=>setShowGrocery(p=>!p)}>
+                {showGrocery?"Hide Grocery List":"Show Grocery List"}
+              </button>
+              {showGrocery?(
+                <div style={{textAlign:"left"}}>
+                  <div style={{display:"flex",justifyContent:"flex-end",marginBottom:8}}>
+                    <button style={btnGhost} onClick={()=>copyList(meal.grocery)}>{copied?"Copied":"Copy"}</button>
+                  </div>
+                  <GroceryChecklist items={meal.grocery} showExport={true}/>
+                </div>
+              ):null}
+            </div>
+          ):null}
         </div>
       ):null}
 
