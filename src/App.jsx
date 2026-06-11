@@ -798,7 +798,7 @@ export default function KoreanMealPlanner(){
       <div style={{display:"flex",background:"#fff",borderBottom:"2px solid #e5e7eb",padding:"0 14px",overflowX:"auto"}}>
         {tabs.map(t=>(
           <button key={t[0]} onClick={()=>setTab(t[0])}
-            style={{padding:"11px 12px",fontSize:12,fontWeight:tab===t[0]?700:400,color:tab===t[0]?"#c2410c":"#6b7280",border:"none",background:"none",borderBottom:tab===t[0]?"2px solid #c2410c":"2px solid transparent",cursor:"pointer",marginBottom:-2,whiteSpace:"nowrap"}}>
+            style={{padding:"13px 12px",fontSize:24,fontWeight:tab===t[0]?700:400,color:tab===t[0]?"#c2410c":"#6b7280",border:"none",background:"none",borderBottom:tab===t[0]?"3px solid #c2410c":"3px solid transparent",cursor:"pointer",marginBottom:-2,whiteSpace:"nowrap"}}>
             {t[1]}
           </button>
         ))}
