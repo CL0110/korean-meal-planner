@@ -472,6 +472,7 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
   const[copied,setCopied]=useState(false);
   const[dragging,setDragging]=useState(null);
   const[dragOver,setDragOver]=useState(null);
+  const[selected,setSelected]=useState(null);
   const planKey=year+"-"+month;
 
   useEffect(()=>{loadStore(STORAGE_PLANS).then(s=>{setPlan(s&&s[planKey]?s[planKey]:null);});},[planKey]);
@@ -510,11 +511,16 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
     savePlan(Object.assign({},plan,{mealDays:nd}));
   },[plan,namulList,banchanList,mainList,savePlan]);
 
+  const swapDays=useCallback((a,b)=>{
+    if(!plan||a===b)return;
+    const d=Object.assign({},plan.mealDays);
+    const tmp=d[a];d[a]=d[b];d[b]=tmp;
+    savePlan(Object.assign({},plan,{mealDays:d}));
+  },[plan,savePlan]);
+
   const handleDrop=(toDay)=>{
     if(dragging==null||!plan||dragging===toDay){setDragging(null);setDragOver(null);return;}
-    const d=Object.assign({},plan.mealDays);
-    const tmp=d[dragging];d[dragging]=d[toDay];d[toDay]=tmp;
-    savePlan(Object.assign({},plan,{mealDays:d}));
+    swapDays(dragging,toDay);
     setDragging(null);setDragOver(null);
   };
 
@@ -550,7 +556,8 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
             {plan?<button onClick={()=>window.print()} style={{background:"#374151",color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontWeight:700,fontSize:13,cursor:"pointer"}}>Print</button>:null}
           </div>
         </div>
-        {plan?<div style={{fontSize:12,color:"#6b7280"}}>{"Cooking "+Object.values(plan.mealDays).filter(Boolean).length+" times this month - drag to swap days"}</div>:null}
+        {plan?<div style={{fontSize:12,color:"#6b7280"}}>{"Cooking "+Object.values(plan.mealDays).filter(Boolean).length+" times this month · tap ⇄ to swap days"}</div>:null}
+        {selected!==null?<div style={{background:"#fef9c3",border:"1px solid #f59e0b",borderRadius:8,padding:"7px 12px",marginTop:8,fontSize:12,color:"#78350f",textAlign:"center"}}>{"Day "+selected+" selected — tap another day to swap, or tap it again to cancel"}</div>:null}
       </div>
 
       <div style={{background:"#fff",borderRadius:12,padding:"12px 10px",marginBottom:12,boxShadow:"0 1px 4px rgba(0,0,0,0.07)"}}>
@@ -562,21 +569,32 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
             if(!day)return <div key={"e"+idx}/>;
             const meal=plan&&plan.mealDays?plan.mealDays[day]:null;
             const isDrg=dragging===day,isOvr=dragOver===day&&dragging!==day;
+            const isSel=selected===day;
             return(
               <div key={day}
-                style={{minHeight:68,borderRadius:10,padding:"5px 5px",background:isOvr?"#fef3c7":meal?"#fff7ed":"#fff",border:isOvr?"2px dashed #c2410c":isDrg?"2px dashed #d1d5db":meal?"1.5px solid #fed7aa":"1.5px solid #f3f4f6",cursor:meal?"grab":"default",opacity:isDrg?0.5:1,position:"relative"}}
+                data-day={day}
+                style={{minHeight:68,borderRadius:10,padding:"5px 4px",background:isSel?"#fef9c3":isOvr?"#fef3c7":meal?"#fff7ed":"#fff",border:isSel?"2px solid #f59e0b":isOvr?"2px dashed #c2410c":isDrg?"2px dashed #d1d5db":meal?"1.5px solid #fed7aa":"1.5px solid #f3f4f6",cursor:meal?"pointer":"default",opacity:isDrg?0.5:1,position:"relative",overflow:"hidden"}}
                 draggable={!!meal}
                 onDragStart={()=>setDragging(day)}
                 onDragOver={e=>{e.preventDefault();setDragOver(day);}}
                 onDrop={()=>handleDrop(day)}
                 onDragEnd={()=>{setDragging(null);setDragOver(null);}}
-                onClick={()=>{if(meal)setExpanded(expanded===day?null:day);}}>
-                <div style={{fontSize:10,fontWeight:isToday(day)?800:500,color:isToday(day)?"#c2410c":"#6b7280",marginBottom:2}}>{day}</div>
+                onClick={()=>{
+                  if(!meal)return;
+                  if(selected!==null){
+                    if(selected===day)setSelected(null);
+                    else{swapDays(selected,day);setSelected(null);}
+                  }else{
+                    setExpanded(expanded===day?null:day);
+                  }
+                }}>
+                <div style={{fontSize:10,fontWeight:isToday(day)?800:500,color:isToday(day)?"#c2410c":"#6b7280",marginBottom:1}}>{day}</div>
                 {meal?(
                   <div>
-                    <div style={{fontSize:10,fontWeight:700,color:"#c2410c",lineHeight:1.3,marginBottom:1}}>{meal.main.name}</div>
-                    <div style={{fontSize:9,color:"#9ca3af",lineHeight:1.4}}>{[...meal.namul,...meal.nonNamul].map(b=>b.name).join(", ")}</div>
-                    <button onClick={e=>{e.stopPropagation();rerollDay(day);}} style={{position:"absolute",top:3,right:3,background:"none",border:"none",cursor:"pointer",fontSize:9,color:"#d1d5db",padding:0}}>{"↻"}</button>
+                    <div style={{fontSize:10,fontWeight:700,color:"#c2410c",lineHeight:1.2,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",marginBottom:1}}>{meal.main.name}</div>
+                    <div style={{fontSize:8,color:"#9ca3af",lineHeight:1.3,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{[...meal.namul,...meal.nonNamul].map(b=>b.name).join(", ")}</div>
+                    <button onClick={e=>{e.stopPropagation();setSelected(isSel?null:day);}} style={{position:"absolute",top:2,right:14,background:"none",border:"none",cursor:"pointer",fontSize:10,color:isSel?"#f59e0b":"#d1d5db",padding:0,lineHeight:1}}>{"⇄"}</button>
+                    <button onClick={e=>{e.stopPropagation();rerollDay(day);}} style={{position:"absolute",top:2,right:2,background:"none",border:"none",cursor:"pointer",fontSize:9,color:"#d1d5db",padding:0,lineHeight:1}}>{"↻"}</button>
                   </div>
                 ):null}
               </div>
