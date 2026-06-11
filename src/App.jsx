@@ -377,7 +377,7 @@ const MealVisual=({mealData})=>{
   const pos=[[80,48],[200,40],[320,48]];
   const trunc=s=>s.length>17?s.slice(0,16)+"…":s;
   return(
-    <svg viewBox="0 0 400 190" style={{width:"100%",borderRadius:12,marginBottom:12,display:"block"}}>
+    <svg viewBox="0 0 400 190" style={{width:"50%",borderRadius:12,marginBottom:12,display:"block",margin:"0 auto 12px"}}>
       <rect x="0" y="0" width="400" height="190" rx="14" fill="#7c5f43"/>
       <rect x="8" y="8" width="384" height="174" rx="10" fill="#8d6e4f"/>
       {sides.map((d,i)=>(
