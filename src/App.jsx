@@ -810,7 +810,9 @@ export default function KoreanMealPlanner(){
             <div style={{fontSize:13,color:"#92400e",lineHeight:1.6,marginBottom:12}}>
               {"Every meal includes one V — namul, a Korean seasoned vegetable side. Click the video icons for Maangchi recipes."}
             </div>
-            <button style={btnPrimary} onClick={generateMeal}>{"Generate Today's Meal"}</button>
+            <button key={meal?meal.id:"init"} className={meal?"btn-nudge":""} style={btnPrimary} onClick={generateMeal}>
+              {meal?"↻ Try a Different Meal":"Generate Today's Meal"}
+            </button>
           </div>
           {meal?<MealResult mealData={meal}/>:null}
           {meal?(
