@@ -550,8 +550,8 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
             <button onClick={nextMonth} style={{background:"#f3f4f6",border:"none",borderRadius:7,padding:"5px 10px",cursor:"pointer",fontSize:14}}>{">"}</button>
           </div>
           <div style={{display:"flex",gap:8}}>
-            <button onClick={generatePlan} style={{background:"#c2410c",color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontWeight:700,fontSize:13,cursor:"pointer"}}>
-              {plan?"Regenerate":"Plan This Month"}
+            <button key={plan?plan.year+"-"+plan.month+"-"+(Object.keys(plan.mealDays).length):"init"} onClick={generatePlan} className={plan?"btn-nudge":""} style={{background:"#c2410c",color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontWeight:700,fontSize:13,cursor:"pointer"}}>
+              {plan?"↻ Regenerate":"Plan This Month"}
             </button>
             {plan?<button onClick={()=>window.print()} style={{background:"#374151",color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontWeight:700,fontSize:13,cursor:"pointer"}}>Print</button>:null}
           </div>
