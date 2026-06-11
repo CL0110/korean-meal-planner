@@ -602,14 +602,17 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
 
       {plan?(
         <div style={{background:"#fff",borderRadius:12,padding:16,marginBottom:16,boxShadow:"0 1px 4px rgba(0,0,0,0.07)"}}>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-            <span style={{fontWeight:700,fontSize:14}}>{"Monthly Groceries ("+monthGrocery.length+")"}</span>
-            <div style={{display:"flex",gap:8}}>
-              <button onClick={()=>setShowMG(p=>!p)} style={{background:"#15803d",color:"#fff",border:"none",borderRadius:8,padding:"6px 14px",cursor:"pointer",fontSize:12,fontWeight:700}}>{showMG?"Hide":"Show"}</button>
-              {showMG?<button onClick={()=>copyList(monthGrocery)} style={{background:"#f3f4f6",border:"none",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontSize:12,fontWeight:600}}>{copied?"Copied":"Copy"}</button>:null}
+          <button onClick={()=>setShowMG(p=>!p)} style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:"100%",padding:"10px 20px",borderRadius:8,border:"none",cursor:"pointer",fontWeight:700,fontSize:14,background:"#15803d",color:"#fff",marginBottom:showMG?12:0}}>
+            {showMG?"Hide Grocery List":"Build Grocery List ("+monthGrocery.length+" items)"}
+          </button>
+          {showMG?(
+            <div>
+              <div style={{display:"flex",justifyContent:"flex-end",marginBottom:8}}>
+                <button onClick={()=>copyList(monthGrocery)} style={{background:"#f3f4f6",border:"none",borderRadius:8,padding:"6px 12px",cursor:"pointer",fontSize:12,fontWeight:600}}>{copied?"Copied":"Copy"}</button>
+              </div>
+              <GroceryChecklist items={monthGrocery} showExport={true}/>
             </div>
-          </div>
-          {showMG?<div style={{marginTop:10}}><GroceryChecklist items={monthGrocery} showExport={true}/></div>:null}
+          ):null}
         </div>
       ):null}
       {!plan?<div style={{textAlign:"center",color:"#9ca3af",fontSize:13,padding:"32px 0"}}>{"Press the button above to plan this month"}</div>:null}
