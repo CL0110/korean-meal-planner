@@ -377,7 +377,7 @@ const MealVisual=({mealData})=>{
   const pos=[[80,48],[200,40],[320,48]];
   const trunc=s=>s.length>17?s.slice(0,16)+"…":s;
   return(
-    <svg viewBox="0 0 400 190" style={{width:"50%",borderRadius:12,marginBottom:12,display:"block",margin:"0 auto 12px"}}>
+    <svg viewBox="0 0 400 190" style={{width:"100%",borderRadius:12,display:"block"}}>
       <rect x="0" y="0" width="400" height="190" rx="14" fill="#7c5f43"/>
       <rect x="8" y="8" width="384" height="174" rx="10" fill="#8d6e4f"/>
       {sides.map((d,i)=>(
@@ -722,31 +722,34 @@ export default function KoreanMealPlanner(){
       <div style={{marginBottom:12}}>
         <span style={{fontWeight:700,fontSize:15}}>{"Today's Table"}</span>
       </div>
-      {[
-        {label:"Namul",desc:"Korean Plant-Based Side",dishes:mealData.namul,color:"#15803d",tag:{label:"Namul",color:"green"}},
-        {label:"Banchan",desc:"Side Dishes",dishes:mealData.nonNamul,color:"#1d4ed8",tag:null},
-        {label:"Main / Soup",desc:"Main Course",dishes:[mealData.main],color:"#c2410c",tag:{label:"MAIN",color:"blue"}}
-      ].map((sec,si)=>(
-        <div key={sec.label}>
-          <div style={{marginTop:si>0?16:0,marginBottom:8,paddingBottom:5,borderBottom:"2px solid "+sec.color,display:"flex",alignItems:"baseline",gap:8}}>
-            <span style={{fontSize:14,fontWeight:800,color:sec.color}}>{sec.label}</span>
-            <span style={{fontSize:11,color:"#9ca3af"}}>{sec.desc}</span>
-          </div>
-          {sec.dishes.map(d=>(
-            <div key={d.id} style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",padding:"9px 0",borderBottom:"1px solid #f3f4f6"}}>
-              <div>
-                <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
-                  <span style={{fontWeight:600}}>{d.name}</span><span style={{color:"#9ca3af",fontSize:12}}>{d.romanized}</span>
-                  {sec.tag?<TAG label={sec.tag.label} color={sec.tag.color}/>:null}
-                  {d.maangchi?<MaangchiLink slug={d.maangchi}/>:null}
-                </div>
-                {d.desc?<div style={{fontSize:11,color:"#6b7280"}}>{d.desc}</div>:null}
+      <div style={{display:"flex",gap:14,alignItems:"flex-start"}}>
+        <div style={{flexShrink:0,width:"42%"}}>
+          <MealVisual mealData={mealData}/>
+        </div>
+        <div style={{flex:1,minWidth:0}}>
+          {[
+            {label:"Namul",desc:"Korean Plant-Based Side",dishes:mealData.namul,color:"#15803d",tag:{label:"Namul",color:"green"}},
+            {label:"Banchan",desc:"Side Dishes",dishes:mealData.nonNamul,color:"#1d4ed8",tag:null},
+            {label:"Main / Soup",desc:"Main Course",dishes:[mealData.main],color:"#c2410c",tag:{label:"MAIN",color:"blue"}}
+          ].map((sec,si)=>(
+            <div key={sec.label}>
+              <div style={{marginTop:si>0?12:0,marginBottom:6,paddingBottom:4,borderBottom:"2px solid "+sec.color,display:"flex",alignItems:"baseline",gap:6}}>
+                <span style={{fontSize:13,fontWeight:800,color:sec.color}}>{sec.label}</span>
+                <span style={{fontSize:10,color:"#9ca3af"}}>{sec.desc}</span>
               </div>
+              {sec.dishes.map(d=>(
+                <div key={d.id} style={{padding:"6px 0",borderBottom:"1px solid #f3f4f6"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:5,flexWrap:"wrap"}}>
+                    <span style={{fontWeight:600,fontSize:13}}>{d.name}</span>
+                    {d.maangchi?<MaangchiLink slug={d.maangchi}/>:null}
+                  </div>
+                  {d.desc?<div style={{fontSize:11,color:"#6b7280"}}>{d.desc}</div>:null}
+                </div>
+              ))}
             </div>
           ))}
         </div>
-      ))}
-      <MealVisual mealData={mealData}/>
+      </div>
     </div>
   );
 
