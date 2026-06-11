@@ -279,8 +279,8 @@ const MaangchiLink=({slug})=>{
   if(!slug)return null;
   return(
     <a href={"https://www.maangchi.com/recipe/"+slug} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()}
-      style={{display:"inline-flex",alignItems:"center",gap:3,fontSize:10,fontWeight:700,color:"#c2410c",background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:5,padding:"2px 7px",textDecoration:"none",whiteSpace:"nowrap"}} title="Watch recipe video on Maangchi">
-      {"▶"}
+      style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:28,height:20,background:"#FF0000",borderRadius:4,textDecoration:"none",flexShrink:0}} title="Watch recipe video on Maangchi">
+      <span style={{display:"inline-block",width:0,height:0,borderTop:"5px solid transparent",borderBottom:"5px solid transparent",borderLeft:"9px solid #fff",marginLeft:2}}/>
     </a>
   );
 };
