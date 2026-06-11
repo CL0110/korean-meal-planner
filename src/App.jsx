@@ -720,7 +720,6 @@ export default function KoreanMealPlanner(){
         <span style={{fontWeight:700,fontSize:15}}>{"Today's Table"}</span>
         <TAG label={"READY"} color="amber"/>
       </div>
-      <MealVisual mealData={mealData}/>
       {[
         {label:"V",dishes:mealData.namul,tag:{label:"V",color:"green"}},
         {label:"Banchan",dishes:mealData.nonNamul,tag:null},
@@ -742,8 +741,9 @@ export default function KoreanMealPlanner(){
           ))}
         </div>
       ))}
+      <MealVisual mealData={mealData}/>
       <div style={{marginTop:12,display:"flex",gap:8,flexWrap:"wrap"}}>
-        <button style={btnGhost} onClick={()=>setShowGrocery(p=>!p)}>{showGrocery?"Hide":"Grocery List"}</button>
+        <button style={btnGreen} onClick={()=>setShowGrocery(p=>!p)}>{showGrocery?"Hide Grocery List":"Grocery List"}</button>
         {showGrocery?<button style={btnGhost} onClick={()=>copyList(mealData.grocery)}>{copied?"Copied":"Copy"}</button>:null}
       </div>
       {showGrocery?(
