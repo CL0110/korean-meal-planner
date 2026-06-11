@@ -716,17 +716,19 @@ export default function KoreanMealPlanner(){
 
   const MealResult=({mealData})=>(
     <div style={card}>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
+      <div style={{marginBottom:12}}>
         <span style={{fontWeight:700,fontSize:15}}>{"Today's Table"}</span>
-        <TAG label={"READY"} color="amber"/>
       </div>
       {[
-        {label:"V",dishes:mealData.namul,tag:{label:"V",color:"green"}},
-        {label:"Banchan",dishes:mealData.nonNamul,tag:null},
-        {label:"Main/Soup",dishes:[mealData.main],tag:{label:"MAIN",color:"blue"}}
+        {label:"Namul",desc:"Korean Plant-Based Side",dishes:mealData.namul,color:"#15803d",tag:{label:"Namul",color:"green"}},
+        {label:"Banchan",desc:"Side Dishes",dishes:mealData.nonNamul,color:"#1d4ed8",tag:null},
+        {label:"Main / Soup",desc:"Main Course",dishes:[mealData.main],color:"#c2410c",tag:{label:"MAIN",color:"blue"}}
       ].map((sec,si)=>(
         <div key={sec.label}>
-          <div style={Object.assign({},sLabel,{marginTop:si>0?10:0})}>{sec.label}</div>
+          <div style={{marginTop:si>0?16:0,marginBottom:8,paddingBottom:5,borderBottom:"2px solid "+sec.color,display:"flex",alignItems:"baseline",gap:8}}>
+            <span style={{fontSize:14,fontWeight:800,color:sec.color}}>{sec.label}</span>
+            <span style={{fontSize:11,color:"#9ca3af"}}>{sec.desc}</span>
+          </div>
           {sec.dishes.map(d=>(
             <div key={d.id} style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",padding:"9px 0",borderBottom:"1px solid #f3f4f6"}}>
               <div>
