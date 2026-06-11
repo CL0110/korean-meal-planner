@@ -374,25 +374,25 @@ function dishEmoji(d){
 
 const MealVisual=({mealData})=>{
   const sides=[...mealData.namul,...mealData.nonNamul];
-  const pos=[[80,62],[200,52],[320,62]];
+  const pos=[[80,48],[200,40],[320,48]];
   const trunc=s=>s.length>17?s.slice(0,16)+"…":s;
   return(
-    <svg viewBox="0 0 400 245" style={{width:"100%",borderRadius:12,marginBottom:12,display:"block"}}>
-      <rect x="0" y="0" width="400" height="245" rx="14" fill="#7c5f43"/>
-      <rect x="8" y="8" width="384" height="229" rx="10" fill="#8d6e4f"/>
+    <svg viewBox="0 0 400 190" style={{width:"100%",borderRadius:12,marginBottom:12,display:"block"}}>
+      <rect x="0" y="0" width="400" height="190" rx="14" fill="#7c5f43"/>
+      <rect x="8" y="8" width="384" height="174" rx="10" fill="#8d6e4f"/>
       {sides.map((d,i)=>(
         <g key={d.id}>
-          <circle cx={pos[i][0]} cy={pos[i][1]} r="36" fill="#f5f0e8" stroke="#ddd2c2" strokeWidth="2"/>
-          <text x={pos[i][0]} y={pos[i][1]+10} textAnchor="middle" fontSize="28">{dishEmoji(d)}</text>
-          <text x={pos[i][0]} y={pos[i][1]+53} textAnchor="middle" fontSize="9" fill="#fff" fontWeight="700">{trunc(d.name)}</text>
+          <circle cx={pos[i][0]} cy={pos[i][1]} r="30" fill="#f5f0e8" stroke="#ddd2c2" strokeWidth="2"/>
+          <text x={pos[i][0]} y={pos[i][1]+8} textAnchor="middle" fontSize="22">{dishEmoji(d)}</text>
+          <text x={pos[i][0]} y={pos[i][1]+44} textAnchor="middle" fontSize="9" fill="#fff" fontWeight="700">{trunc(d.name)}</text>
         </g>
       ))}
-      <circle cx="150" cy="172" r="50" fill="#3b3531" stroke="#2a2522" strokeWidth="3"/>
-      <text x="150" y="185" textAnchor="middle" fontSize="36">{dishEmoji(mealData.main)}</text>
-      <text x="150" y="236" textAnchor="middle" fontSize="10" fill="#fff" fontWeight="700">{trunc(mealData.main.name)}</text>
-      <circle cx="300" cy="172" r="38" fill="#f5f0e8" stroke="#ddd2c2" strokeWidth="2"/>
-      <text x="300" y="184" textAnchor="middle" fontSize="28">{"🍚"}</text>
-      <text x="300" y="228" textAnchor="middle" fontSize="9" fill="#fff" fontWeight="700">Rice</text>
+      <circle cx="150" cy="134" r="39" fill="#3b3531" stroke="#2a2522" strokeWidth="3"/>
+      <text x="150" y="145" textAnchor="middle" fontSize="28">{dishEmoji(mealData.main)}</text>
+      <text x="150" y="182" textAnchor="middle" fontSize="9" fill="#fff" fontWeight="700">{trunc(mealData.main.name)}</text>
+      <circle cx="300" cy="134" r="30" fill="#f5f0e8" stroke="#ddd2c2" strokeWidth="2"/>
+      <text x="300" y="143" textAnchor="middle" fontSize="22">{"🍚"}</text>
+      <text x="300" y="173" textAnchor="middle" fontSize="9" fill="#fff" fontWeight="700">Rice</text>
     </svg>
   );
 };
