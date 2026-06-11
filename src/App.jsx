@@ -810,8 +810,8 @@ export default function KoreanMealPlanner(){
             {list:banchanList,type:"nonnamul",label:"Banchan",req:"(pick 2)",ok:manualNonNamul.length===2,color:"#1d4ed8",toggle:toggleManualNonNamul,sel:d=>!!manualNonNamul.find(x=>x.id===d.id),count:manualNonNamul.length+"/2"},
             {list:mainList,type:"main",label:"Main/Soup",req:"(pick 1)",ok:!!manualMain,color:"#c2410c",toggle:toggleManualMain,sel:d=>!!(manualMain&&manualMain.id===d.id),count:manualMain?"1/1":"0/1"}
           ].map(sec=>(
-            <div key={sec.type} ref={sec.type==="nonnamul"?banchanRef:sec.type==="main"?mainRef:null} style={card}>
-              <div style={{fontWeight:800,fontSize:17,marginBottom:10,display:"flex",justifyContent:"space-between",alignItems:"baseline"}}>
+            <div key={sec.type} ref={sec.type==="nonnamul"?banchanRef:sec.type==="main"?mainRef:null} style={Object.assign({},card,{marginBottom:20})}>
+              <div style={{fontWeight:800,fontSize:20,marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"baseline"}}>
                 <span style={{color:sec.color}}>{sec.label} <span style={{color:"#9ca3af",fontWeight:400,fontSize:13}}>{sec.req}</span></span>
                 <span style={{color:sec.ok?sec.color:"#9ca3af",fontSize:15}}>{sec.count}</span>
               </div>
