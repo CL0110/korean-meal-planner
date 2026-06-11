@@ -216,7 +216,7 @@ function pickBanchanVaried(banchanList,n){
   }
   return result;
 }
-function buildGroceryList(dishes){const s=new Set(),l=[];dishes.forEach(d=>d.ingredients.forEach(ing=>{const k=ing.toLowerCase();if(!s.has(k)){s.add(k);l.push(ing);}}));return l.sort((a,b)=>a.localeCompare(b,"en"));}
+function buildGroceryList(dishes){const map=new Map();dishes.forEach(d=>d.ingredients.forEach(ing=>{const k=ing.toLowerCase();if(!map.has(k))map.set(k,{ing,dishNames:new Set()});map.get(k).dishNames.add(d.name);}));return Array.from(map.values()).map(({ing,dishNames})=>({ing,dishes:Array.from(dishNames)})).sort((a,b)=>a.ing.localeCompare(b.ing,"en"));}
 function genId(p){return p+Date.now()+Math.random().toString(36).slice(2,6);}
 
 function generateVariedMeals(namulList,banchanList,mainList,count){
@@ -303,7 +303,7 @@ const GroceryChecklist=({items,showExport})=>{
   const hmartUrl=ing=>"https://www.hmart.com/search?q="+koTerm(ing);
   const instacartUrl=ing=>"https://www.instacart.com/store/s?k="+enTerm(ing);
 
-  const listText=items.join("\n");
+  const listText=items.map(x=>typeof x==="string"?x:x.ing).join("\n");
   const exportEmail=()=>window.open("mailto:?subject="+encodeURIComponent("Grocery List")+"&body="+encodeURIComponent(listText));
   const exportWhatsApp=()=>window.open("https://wa.me/?text="+encodeURIComponent(listText));
   const exportAppleNotes=()=>window.open("mobilenotes://add?body="+encodeURIComponent(listText));
@@ -329,22 +329,36 @@ const GroceryChecklist=({items,showExport})=>{
           <button onClick={exportAppleNotes} style={Object.assign({},iconBtn,{background:"#FFD60A",color:"#1a1a1a"})}>{"📝 Notes"}</button>
         </div>
       ):null}
-      {items.map((ing,i)=>(
-        <div key={i} style={{display:"flex",alignItems:"center",gap:6,padding:"5px 2px",borderBottom:"1px solid #f9f9f9"}}>
-          <label style={{display:"flex",alignItems:"center",gap:8,flex:1,cursor:"pointer",fontSize:13,color:checked[ing]?"#9ca3af":"#374151",textDecoration:checked[ing]?"line-through":"none"}}>
-            <input type="checkbox" checked={!!checked[ing]} onChange={()=>toggle(ing)} style={{accentColor:"#c2410c",width:15,height:15,flexShrink:0}}/>
-            {ing}
-          </label>
-          <a href={hmartUrl(ing)} target="_blank" rel="noopener noreferrer"
-            style={Object.assign({},iconBtn,{background:"#e8f4e8",color:"#1a6e1a",textDecoration:"none",display:"inline-block"})}>
-            {"H Mart"}
-          </a>
-          <a href={instacartUrl(ing)} target="_blank" rel="noopener noreferrer"
-            style={Object.assign({},iconBtn,{background:"#fff0e6",color:"#cc4e00",textDecoration:"none",display:"inline-block"})}>
-            {"Instacart"}
-          </a>
-        </div>
-      ))}
+      {items.map((item,i)=>{
+        const ingText=typeof item==="string"?item:item.ing;
+        const dishTags=typeof item==="string"?[]:(item.dishes||[]);
+        return(
+          <div key={i} style={{display:"flex",alignItems:"flex-start",gap:6,padding:"6px 2px",borderBottom:"1px solid #f9f9f9"}}>
+            <div style={{flex:1,minWidth:0}}>
+              <label style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",fontSize:13,color:checked[ingText]?"#9ca3af":"#374151",textDecoration:checked[ingText]?"line-through":"none"}}>
+                <input type="checkbox" checked={!!checked[ingText]} onChange={()=>toggle(ingText)} style={{accentColor:"#c2410c",width:15,height:15,flexShrink:0}}/>
+                {ingText}
+              </label>
+              {dishTags.length>0?(
+                <div style={{display:"flex",flexWrap:"wrap",gap:3,marginTop:3,marginLeft:23}}>
+                  {dishTags.slice(0,4).map(d=>(
+                    <span key={d} style={{fontSize:10,background:"#f0f4ff",color:"#3b5bdb",borderRadius:4,padding:"1px 6px",fontWeight:600}}>{d}</span>
+                  ))}
+                  {dishTags.length>4?<span style={{fontSize:10,color:"#9ca3af",padding:"1px 4px"}}>+{dishTags.length-4}</span>:null}
+                </div>
+              ):null}
+            </div>
+            <a href={hmartUrl(ingText)} target="_blank" rel="noopener noreferrer"
+              style={Object.assign({},iconBtn,{background:"#e8f4e8",color:"#1a6e1a",textDecoration:"none",display:"inline-block",marginTop:1})}>
+              {"H Mart"}
+            </a>
+            <a href={instacartUrl(ingText)} target="_blank" rel="noopener noreferrer"
+              style={Object.assign({},iconBtn,{background:"#fff0e6",color:"#cc4e00",textDecoration:"none",display:"inline-block",marginTop:1})}>
+              {"Instacart"}
+            </a>
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -505,7 +519,7 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
   };
 
   const monthGrocery=plan?buildGroceryList(Object.values(plan.mealDays).filter(Boolean).flatMap(m=>[...m.namul,...m.nonNamul,m.main])):[];
-  const copyList=list=>{navigator.clipboard.writeText(list.join("\n")).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});};
+  const copyList=list=>{navigator.clipboard.writeText(list.map(x=>typeof x==="string"?x:x.ing).join("\n")).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});};
 
   const dim=getDaysInMonth(year,month),fd=getFirstDayOfWeek(year,month);
   const cells=[];
@@ -692,7 +706,7 @@ export default function KoreanMealPlanner(){
     if(!manualNamul.length||manualNonNamul.length<2||!manualMain)return;
     setManualMeal({namul:manualNamul,nonNamul:manualNonNamul,main:manualMain,grocery:buildGroceryList([...manualNamul,...manualNonNamul,manualMain])});
   };
-  const copyList=list=>{navigator.clipboard.writeText(list.join("\n")).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});};
+  const copyList=list=>{navigator.clipboard.writeText(list.map(x=>typeof x==="string"?x:x.ing).join("\n")).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});};
 
   const card={background:"#fff",borderRadius:12,padding:16,marginBottom:12,boxShadow:"0 1px 4px rgba(0,0,0,0.07)"};
   const chip={display:"inline-block",fontSize:11,background:"#f3f4f6",borderRadius:6,padding:"2px 8px",margin:"2px 2px 2px 0",color:"#374151"};
