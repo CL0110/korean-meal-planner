@@ -445,6 +445,57 @@ function dishEmoji(d){
   return "🥬";
 }
 
+function dishCardGradient(d){
+  const s=(d.name+" "+(d.romanized||"")+" "+(d.desc||"")).toLowerCase();
+  const has=function(){for(let i=0;i<arguments.length;i++){if(s.indexOf(arguments[i])>=0)return true;}return false;};
+  if(has("찌개","jjigae","stew"))return["#b45309","#78350f"];
+  if((has("국","탕","guk","tang","soup"))&&!has("탕수","tangsu"))return["#d97706","#92400e"];
+  if(has("전","jeon","pancake"))return["#ca8a04","#854d0e"];
+  if(has("새우","오징어","문어","낙지","꽃게","굴","조개","홍합","생선","고등어","갈치","꽁치","대구","코다리","북어","삼치","fish","shrimp","squid","octopus","crab","oyster","clam","mackerel"))return["#0e7490","#1e3a5f"];
+  if(has("닭","chicken","dak"))return["#ea580c","#9a3412"];
+  if(has("김치","kimchi"))return["#dc2626","#7f1d1d"];
+  if(has("돼지","불고기","갈비","pork","beef","bulgogi","meat","spam","ham","sausage","jokbal","bossam"))return["#b91c1c","#7c2d12"];
+  if(has("계란","egg","gyeran"))return["#d97706","#b45309"];
+  if(has("당면","noodle","japchae","myeon"))return["#92400e","#78350f"];
+  if(has("밥","bap","rice"))return["#78716c","#44403c"];
+  if(has("버섯","mushroom"))return["#6d28d9","#4c1d95"];
+  if(has("감자","potato"))return["#a16207","#78350f"];
+  if(d.category==="namul")return["#15803d","#064e3b"];
+  if(d.category==="banchan")return["#4338ca","#312e81"];
+  return["#6d28d9","#4c1d95"];
+}
+
+function dishSvg(d){
+  const s=(d.name+" "+(d.romanized||"")+" "+(d.desc||"")).toLowerCase();
+  const has=function(){for(let i=0;i<arguments.length;i++){if(s.indexOf(arguments[i])>=0)return true;}return false;};
+  const st={width:"100%",height:"100%",position:"absolute",top:0,left:0};
+  if(has("찌개","jjigae","stew","국","탕","guk","tang","soup")&&!has("탕수","tangsu"))
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="50" cy="50" rx="34" ry="13" fill="currentColor"/><path d="M16 50Q16 32 50 32Q84 32 84 50" fill="currentColor"/><path d="M30 26Q33 18 30 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"/><path d="M50 23Q53 15 50 7" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"/><path d="M70 26Q73 18 70 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"/><ellipse cx="50" cy="32" rx="28" ry="5" fill="currentColor" opacity="0.3"/></svg>);
+  if(has("전","jeon","pancake"))
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="42" cy="40" rx="28" ry="20" fill="currentColor"/><rect x="68" y="37" width="22" height="6" rx="3" fill="currentColor"/><ellipse cx="42" cy="38" rx="20" ry="13" fill="currentColor" opacity="0.35"/><circle cx="34" cy="35" r="3" fill="currentColor" opacity="0.25"/><circle cx="48" cy="40" r="2.5" fill="currentColor" opacity="0.25"/><circle cx="38" cy="44" r="2" fill="currentColor" opacity="0.25"/></svg>);
+  if(has("새우","오징어","문어","낙지","꽃게","굴","조개","홍합","생선","고등어","갈치","꽁치","대구","코다리","북어","삼치","fish","shrimp","squid","octopus","crab","clam","mackerel"))
+    return(<svg viewBox="0 0 100 70" style={st}><path d="M18 35Q35 18 62 28Q75 32 75 35Q75 38 62 42Q35 52 18 35Z" fill="currentColor"/><path d="M75 35L88 25L88 45Z" fill="currentColor"/><circle cx="30" cy="32" r="2.5" fill="currentColor" opacity="0.3"/><path d="M22 48Q28 58 40 56" stroke="currentColor" strokeWidth="1.8" fill="none" opacity="0.25" strokeLinecap="round"/><path d="M42 50Q48 60 60 58" stroke="currentColor" strokeWidth="1.8" fill="none" opacity="0.25" strokeLinecap="round"/><path d="M62 46Q68 54 76 50" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.2" strokeLinecap="round"/></svg>);
+  if(has("닭","chicken","dak"))
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="40" cy="32" rx="22" ry="17" fill="currentColor"/><path d="M58 38Q68 44 78 50" stroke="currentColor" strokeWidth="8" fill="none" strokeLinecap="round"/><circle cx="58" cy="50" r="4" fill="currentColor" opacity="0.3"/><path d="M30 22Q35 12 28 8" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.3" strokeLinecap="round"/><path d="M45 20Q50 10 43 6" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.3" strokeLinecap="round"/></svg>);
+  if(has("김치","kimchi"))
+    return(<svg viewBox="0 0 100 70" style={st}><path d="M32 14Q28 14 27 18Q24 28 24 40Q24 55 34 58Q40 59 50 59Q60 59 66 58Q76 55 76 40Q76 28 73 18Q72 14 68 14Z" fill="currentColor"/><rect x="35" y="10" width="30" height="6" rx="3" fill="currentColor"/><ellipse cx="50" cy="10" rx="16" ry="4" fill="currentColor" opacity="0.4"/><path d="M38 30Q50 38 62 30" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.3"/><path d="M36 40Q50 48 64 40" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.3"/></svg>);
+  if(has("돼지","불고기","갈비","pork","beef","bulgogi","meat","spam","ham","sausage","jokbal","bossam"))
+    return(<svg viewBox="0 0 100 70" style={st}><rect x="14" y="28" width="72" height="22" rx="4" fill="currentColor"/><line x1="26" y1="28" x2="26" y2="50" stroke="currentColor" strokeWidth="2.5" opacity="0.3"/><line x1="40" y1="28" x2="40" y2="50" stroke="currentColor" strokeWidth="2.5" opacity="0.3"/><line x1="54" y1="28" x2="54" y2="50" stroke="currentColor" strokeWidth="2.5" opacity="0.3"/><line x1="68" y1="28" x2="68" y2="50" stroke="currentColor" strokeWidth="2.5" opacity="0.3"/><path d="M30 22Q33 14 30 6" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.35" strokeLinecap="round"/><path d="M55 20Q58 12 55 4" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.35" strokeLinecap="round"/></svg>);
+  if(has("계란","egg","gyeran"))
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="50" cy="38" rx="28" ry="22" fill="currentColor"/><ellipse cx="50" cy="36" rx="14" ry="11" fill="currentColor" opacity="0.35"/></svg>);
+  if(has("당면","noodle","japchae","myeon"))
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="45" cy="48" rx="32" ry="12" fill="currentColor"/><path d="M13 48Q13 30 45 30Q77 30 77 48" fill="currentColor"/><path d="M28 30Q34 18 30 8" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.35" strokeLinecap="round"/><path d="M45 30Q42 20 46 10" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.35" strokeLinecap="round"/><path d="M62 30Q56 18 60 8" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.35" strokeLinecap="round"/><line x1="78" y1="10" x2="74" y2="42" stroke="currentColor" strokeWidth="2" opacity="0.4" strokeLinecap="round"/><line x1="83" y1="12" x2="79" y2="44" stroke="currentColor" strokeWidth="2" opacity="0.4" strokeLinecap="round"/></svg>);
+  if(has("밥","bap","rice"))
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="50" cy="46" rx="32" ry="12" fill="currentColor"/><path d="M18 46Q18 32 50 32Q82 32 82 46" fill="currentColor"/><ellipse cx="50" cy="32" rx="24" ry="7" fill="currentColor" opacity="0.35"/><circle cx="40" cy="30" r="3" fill="currentColor" opacity="0.2"/><circle cx="54" cy="28" r="2.5" fill="currentColor" opacity="0.2"/><circle cx="48" cy="34" r="2" fill="currentColor" opacity="0.2"/></svg>);
+  if(has("버섯","mushroom"))
+    return(<svg viewBox="0 0 100 70" style={st}><path d="M22 38Q22 16 50 12Q78 16 78 38Z" fill="currentColor"/><rect x="42" y="38" width="16" height="22" rx="4" fill="currentColor" opacity="0.6"/><circle cx="35" cy="26" r="3" fill="currentColor" opacity="0.2"/><circle cx="55" cy="22" r="2.5" fill="currentColor" opacity="0.2"/><circle cx="62" cy="32" r="2" fill="currentColor" opacity="0.2"/></svg>);
+  if(has("감자","potato"))
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="50" cy="38" rx="30" ry="20" fill="currentColor"/><circle cx="38" cy="30" r="2" fill="currentColor" opacity="0.3"/><circle cx="55" cy="28" r="1.5" fill="currentColor" opacity="0.3"/><circle cx="60" cy="40" r="2" fill="currentColor" opacity="0.3"/><circle cx="42" cy="44" r="1.5" fill="currentColor" opacity="0.3"/></svg>);
+  if(d.category==="namul")
+    return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="50" cy="44" rx="32" ry="16" fill="currentColor"/><path d="M35 36Q30 20 38 8" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round"/><path d="M50 34Q48 18 55 6" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round"/><path d="M65 36Q68 20 62 8" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.4" strokeLinecap="round"/><path d="M35 36Q32 28 38 20" fill="currentColor" opacity="0.2"/><path d="M65 36Q68 28 62 20" fill="currentColor" opacity="0.2"/></svg>);
+  return(<svg viewBox="0 0 100 70" style={st}><ellipse cx="34" cy="36" rx="22" ry="12" fill="currentColor"/><ellipse cx="68" cy="28" rx="18" ry="10" fill="currentColor" opacity="0.7"/><ellipse cx="65" cy="50" rx="16" ry="9" fill="currentColor" opacity="0.5"/></svg>);
+}
+
 const MealVisual=({mealData})=>{
   const sides=[...mealData.namul,...mealData.nonNamul];
   const pos=[[80,48],[200,40],[320,48]];
@@ -974,45 +1025,44 @@ function RecipeListTab({namulList,banchanList,mainList,addDish,deleteDish}){
       </div>
       {addingTo?<AddDishForm category={addingTo} onAdd={d=>addDish(addingTo,d)} onClose={()=>setAddingTo(null)}/>:null}
 
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:10}}>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(175px,1fr))",gap:12}}>
         {filtered.map(d=>{
-          const thumbUrl=d.maangchi?"https://www.maangchi.com/wp-content/uploads/"+d.maangchi+"-590x332.jpg":null;
           const isExpanded=expandedDish&&expandedDish.id===d.id;
+          const g=dishCardGradient(d);
           return(
             <div key={d.id+d.category} onClick={()=>setExpandedDish(isExpanded?null:d)}
-              style={{borderRadius:12,overflow:"hidden",cursor:"pointer",background:"#fff",boxShadow:isExpanded?"0 0 0 3px "+catColor(d.category)+",0 4px 16px rgba(0,0,0,0.12)":"0 2px 8px rgba(0,0,0,0.07)",transition:"box-shadow 0.2s, transform 0.2s",position:"relative"}}>
-              <div style={{width:"100%",aspectRatio:"16/11",background:"linear-gradient(135deg,"+catColor(d.category)+"22,"+catColor(d.category)+"44)",position:"relative",overflow:"hidden"}}>
-                {thumbUrl?(
-                  <img src={thumbUrl} alt={d.name}
-                    style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}
-                    onError={e=>{e.target.style.display="none";e.target.nextSibling.style.display="flex";}}/>
-                ):null}
-                <div style={{display:thumbUrl?"none":"flex",width:"100%",height:"100%",alignItems:"center",justifyContent:"center",fontSize:42,position:"absolute",top:0,left:0,background:"linear-gradient(135deg,"+catColor(d.category)+"33,"+catColor(d.category)+"55)"}}>
-                  {dishEmoji(d)}
+              style={{borderRadius:14,overflow:"hidden",cursor:"pointer",background:"#fff",boxShadow:isExpanded?"0 0 0 3px "+catColor(d.category)+",0 8px 24px rgba(0,0,0,0.16)":"0 2px 12px rgba(0,0,0,0.08)",transition:"box-shadow 0.25s, transform 0.25s",position:"relative"}}>
+              <div style={{width:"100%",aspectRatio:"16/11",background:"linear-gradient(145deg,"+g[0]+","+g[1]+")",position:"relative",overflow:"hidden"}}>
+                <div style={{position:"absolute",inset:0,color:"rgba(255,255,255,0.15)"}}>
+                  {dishSvg(d)}
+                </div>
+                <div style={{position:"absolute",top:"42%",left:"50%",transform:"translate(-50%,-50%)",width:72,height:72,borderRadius:"50%",background:"radial-gradient(circle,rgba(255,255,255,0.18) 0%,transparent 70%)"}}/>
+                <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",paddingBottom:20}}>
+                  <span style={{fontSize:52,filter:"drop-shadow(0 3px 10px rgba(0,0,0,0.3))"}}>{dishEmoji(d)}</span>
                 </div>
                 <div style={{position:"absolute",top:6,left:6}}>
-                  <span style={{fontSize:9,fontWeight:700,padding:"2px 8px",borderRadius:99,background:catColor(d.category),color:"#fff",textTransform:"uppercase",letterSpacing:"0.05em"}}>{catLabel(d.category)}</span>
+                  <span style={{fontSize:9,fontWeight:700,padding:"2px 8px",borderRadius:99,background:"rgba(0,0,0,0.3)",backdropFilter:"blur(4px)",WebkitBackdropFilter:"blur(4px)",color:"#fff",textTransform:"uppercase",letterSpacing:"0.05em"}}>{catLabel(d.category)}</span>
                 </div>
                 {d.maangchi?(
                   <a href={"https://www.maangchi.com/recipe/"+d.maangchi} target="_blank" rel="noopener noreferrer"
                     onClick={e=>e.stopPropagation()}
-                    style={{position:"absolute",top:6,right:6,width:26,height:20,background:"#FF0000",borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",opacity:0.9}}>
+                    style={{position:"absolute",top:6,right:6,width:26,height:20,background:"rgba(255,0,0,0.85)",borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none"}}>
                     <span style={{display:"inline-block",width:0,height:0,borderTop:"4px solid transparent",borderBottom:"4px solid transparent",borderLeft:"7px solid #fff",marginLeft:1}}/>
                   </a>
                 ):null}
-                <div style={{position:"absolute",bottom:0,left:0,right:0,height:"50%",background:"linear-gradient(transparent,rgba(0,0,0,0.7))"}}/>
-                <div style={{position:"absolute",bottom:6,left:8,right:8}}>
-                  <div style={{fontSize:13,fontWeight:800,color:"#fff",textShadow:"0 1px 4px rgba(0,0,0,0.6)",lineHeight:1.2,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{d.name}</div>
-                  <div style={{fontSize:10,color:"rgba(255,255,255,0.85)",textShadow:"0 1px 3px rgba(0,0,0,0.5)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{d.romanized}</div>
+                <div style={{position:"absolute",bottom:0,left:0,right:0,height:"55%",background:"linear-gradient(transparent,rgba(0,0,0,0.6))"}}/>
+                <div style={{position:"absolute",bottom:7,left:8,right:8}}>
+                  <div style={{fontSize:13,fontWeight:800,color:"#fff",textShadow:"0 1px 4px rgba(0,0,0,0.5)",lineHeight:1.15,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{d.name}</div>
+                  <div style={{fontSize:10,color:"rgba(255,255,255,0.88)",fontWeight:500,textShadow:"0 1px 3px rgba(0,0,0,0.4)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{d.romanized}</div>
                 </div>
               </div>
               {isExpanded?(
-                <div style={{padding:"10px 10px 12px",borderTop:"2px solid "+catColor(d.category)+"33",animation:"slideUp 0.2s ease-out"}}>
-                  {d.desc?<div style={{fontSize:12,color:"#6b7280",marginBottom:8}}>{d.desc}</div>:null}
-                  <div style={{fontSize:10,fontWeight:700,color:"#9ca3af",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:5}}>Ingredients</div>
+                <div style={{padding:"10px 10px 12px",borderTop:"2px solid "+catColor(d.category)+"22",animation:"slideUp 0.2s ease-out"}}>
+                  {d.desc?<div style={{fontSize:12,color:"#6b7280",marginBottom:8,lineHeight:1.4}}>{d.desc}</div>:null}
+                  <div style={{fontSize:10,fontWeight:700,color:catColor(d.category),textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:5,opacity:0.7}}>Ingredients</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:3}}>
                     {d.ingredients.map((ing,j)=>(
-                      <span key={j} style={{fontSize:11,background:"#f3f4f6",borderRadius:5,padding:"2px 7px",color:"#374151"}}>{ing}</span>
+                      <span key={j} style={{fontSize:11,background:catColor(d.category)+"10",border:"1px solid "+catColor(d.category)+"20",borderRadius:5,padding:"2px 7px",color:"#374151"}}>{ing}</span>
                     ))}
                   </div>
                   {d.custom?(
