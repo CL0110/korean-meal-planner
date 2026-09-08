@@ -175,6 +175,64 @@ const SEED_MAIN = [
   { id:"m73", name:"Ojingeo Tonggui", romanized:"오징어 통구이", desc:"Spicy grilled squid", maangchi:"ojingeo-tonggui", ingredients:["Squid","Gochujang","Soy sauce","Sugar","Minced garlic","Sesame oil"] },
 ];
 
+const SEED_INGREDIENTS = [
+  {id:"ig1",name:"Spinach",korean:"시금치",emoji:"🥬",category:"vegetable",keyNutrient:"Iron & Folate",benefits:["Strengthens bones","Boosts brain function","Fights anemia","Rich in antioxidants"],color:"#3a7a3a"},
+  {id:"ig2",name:"Soybean Sprouts",korean:"콩나물",emoji:"🌱",category:"vegetable",keyNutrient:"Vitamin C & Folate",benefits:["Boosts immunity","Aids digestion","Reduces inflammation","Hangover remedy"],color:"#a8b84a"},
+  {id:"ig3",name:"Mung Bean Sprouts",korean:"숙주",emoji:"🌱",category:"vegetable",keyNutrient:"Vitamin K & C",benefits:["Supports bone health","Low calorie nutrition","Aids detoxification","Heart protective"],color:"#b8c86a"},
+  {id:"ig4",name:"Perilla Leaves",korean:"깻잎",emoji:"🌿",category:"vegetable",keyNutrient:"Omega-3 & Vitamin A",benefits:["Anti-allergenic","Rich in omega-3 fats","Antimicrobial","Supports skin health"],color:"#2d5a2d"},
+  {id:"ig5",name:"Water Parsley",korean:"미나리",emoji:"🌿",category:"vegetable",keyNutrient:"Vitamin A & Iron",benefits:["Natural detoxifier","Purifies blood","Liver protection","Reduces heavy metals"],color:"#3a8a3a"},
+  {id:"ig6",name:"Asian Chives",korean:"부추",emoji:"🌿",category:"vegetable",keyNutrient:"Allicin & Vitamin K",benefits:["Boosts circulation","Antibacterial","Warms the body","Aids digestion"],color:"#2d7a3d"},
+  {id:"ig7",name:"Bok Choy",korean:"청경채",emoji:"🥬",category:"vegetable",keyNutrient:"Calcium & Vitamin C",benefits:["Strengthens bones","Cancer-fighting compounds","Heart health","Low calorie superfood"],color:"#4a8a4a"},
+  {id:"ig8",name:"Lettuce",korean:"상추",emoji:"🥬",category:"vegetable",keyNutrient:"Vitamin A & Lactucarium",benefits:["Natural sleep aid","Calms nerves","Hydrating","Aids digestion"],color:"#5a9a4a"},
+  {id:"ig9",name:"Green Onion",korean:"파",emoji:"🧅",category:"vegetable",keyNutrient:"Vitamin K & Allicin",benefits:["Antibacterial","Boosts immunity","Aids digestion","Reduces cold symptoms"],color:"#4a8a4a"},
+  {id:"ig10",name:"Broccoli",korean:"브로콜리",emoji:"🥦",category:"vegetable",keyNutrient:"Sulforaphane",benefits:["Cancer prevention","Liver detox","Anti-aging","Bone strength"],color:"#2d7a3d"},
+  {id:"ig11",name:"Carrot",korean:"당근",emoji:"🥕",category:"vegetable",keyNutrient:"Beta-carotene",benefits:["Fights skin aging","Improves vision","Boosts immunity","Heart health"],color:"#d47a1a"},
+  {id:"ig12",name:"Radish",korean:"무",emoji:"🥔",category:"vegetable",keyNutrient:"Vitamin C & Enzymes",benefits:["Aids digestion","Natural decongestant","Detoxifying","Anti-inflammatory"],color:"#c8b8a8"},
+  {id:"ig13",name:"Zucchini",korean:"애호박",emoji:"🥒",category:"vegetable",keyNutrient:"Vitamin A & Potassium",benefits:["Supports eye health","Heart health","Low calorie","Aids weight management"],color:"#5a8a3a"},
+  {id:"ig14",name:"Cucumber",korean:"오이",emoji:"🥒",category:"vegetable",keyNutrient:"Hydration & Silica",benefits:["Hydrating for skin","Reduces puffiness","Cooling effect","Anti-inflammatory"],color:"#3a7a4a"},
+  {id:"ig15",name:"Eggplant",korean:"가지",emoji:"🍆",category:"vegetable",keyNutrient:"Anthocyanins",benefits:["Brain protection","Heart health","Cancer prevention","Rich in fiber"],color:"#5a2d6a"},
+  {id:"ig16",name:"Napa Cabbage",korean:"배추",emoji:"🥬",category:"vegetable",keyNutrient:"Vitamin C & Fiber",benefits:["Gut health","Immune support","Weight management","Anti-inflammatory"],color:"#8aaa5a"},
+  {id:"ig17",name:"Cabbage",korean:"양배추",emoji:"🥬",category:"vegetable",keyNutrient:"Vitamin K & Glutamine",benefits:["Heals stomach lining","Anti-inflammatory","Detoxification","Digestive health"],color:"#7a9a5a"},
+  {id:"ig18",name:"Potato",korean:"감자",emoji:"🥔",category:"vegetable",keyNutrient:"Potassium & Vitamin C",benefits:["Heart health","Sustained energy","Resistant starch for gut","Blood pressure control"],color:"#b89a6a"},
+  {id:"ig19",name:"Lotus Root",korean:"연근",emoji:"🪷",category:"vegetable",keyNutrient:"Fiber & Vitamin C",benefits:["Aids digestion","Boosts energy","Supports immunity","Blood health"],color:"#c4a882"},
+  {id:"ig20",name:"Onion",korean:"양파",emoji:"🧅",category:"vegetable",keyNutrient:"Quercetin",benefits:["Anti-allergenic","Heart protection","Blood sugar regulation","Antibacterial"],color:"#c4954a"},
+  {id:"ig21",name:"Bellflower Root",korean:"도라지",emoji:"🌿",category:"vegetable",keyNutrient:"Saponins",benefits:["Respiratory health","Sore throat relief","Expectorant","Anti-inflammatory"],color:"#c4b494"},
+  {id:"ig22",name:"Fernbrake",korean:"고사리",emoji:"🌿",category:"vegetable",keyNutrient:"Beta-carotene & Fiber",benefits:["Bone health","Rich in minerals","Aids digestion","Antioxidant"],color:"#6a5a3a"},
+  {id:"ig23",name:"Green Chili",korean:"고추",emoji:"🌶️",category:"vegetable",keyNutrient:"Capsaicin & Vitamin C",benefits:["Metabolism booster","Pain relief","Heart health","Fat burning"],color:"#2d8a2d"},
+  {id:"ig24",name:"Asparagus",korean:"아스파라거스",emoji:"🌿",category:"vegetable",keyNutrient:"Folate & Vitamin K",benefits:["Anti-aging","Natural diuretic","Supports fertility","Brain health"],color:"#5a8a3a"},
+  {id:"ig25",name:"Mushroom",korean:"버섯",emoji:"🍄",category:"vegetable",keyNutrient:"Selenium & Vitamin D",benefits:["Immune support","Brain health","Anti-cancer","Rich in antioxidants"],color:"#8a7a60"},
+  {id:"ig26",name:"Garlic Scapes",korean:"마늘쫑",emoji:"🌿",category:"vegetable",keyNutrient:"Allicin & Manganese",benefits:["Immune booster","Heart protective","Antibacterial","Antioxidant"],color:"#5a9a4a"},
+  {id:"ig27",name:"Seaweed",korean:"미역/김",emoji:"🌊",category:"sea-vegetable",keyNutrient:"Iodine & Calcium",benefits:["Thyroid health","Postpartum recovery","Bone strength","Detoxification"],color:"#2d5a4a"},
+  {id:"ig28",name:"Tofu",korean:"두부",emoji:"🧈",category:"protein",keyNutrient:"Plant Protein & Calcium",benefits:["Heart health","Bone strength","Menopausal relief","Low calorie protein"],color:"#e8dcc4"},
+  {id:"ig29",name:"Egg",korean:"계란",emoji:"🥚",category:"protein",keyNutrient:"Choline & Protein",benefits:["Brain health","Eye protection","Muscle building","Complete nutrition"],color:"#e8d4b0"},
+  {id:"ig30",name:"Beef",korean:"소고기",emoji:"🥩",category:"protein",keyNutrient:"Iron & B12",benefits:["Prevents anemia","Muscle growth","Brain function","Energy production"],color:"#8a3a2a"},
+  {id:"ig31",name:"Pork",korean:"돼지고기",emoji:"🥩",category:"protein",keyNutrient:"Thiamine (B1)",benefits:["Energy metabolism","Muscle recovery","Nervous system support","Rich in selenium"],color:"#c47a6a"},
+  {id:"ig32",name:"Chicken",korean:"닭고기",emoji:"🍗",category:"protein",keyNutrient:"Lean Protein & Niacin",benefits:["Muscle building","Heart health","Mood regulation","Immune support"],color:"#d4a46a"},
+  {id:"ig33",name:"Mackerel",korean:"고등어",emoji:"🐟",category:"seafood",keyNutrient:"Omega-3 & DHA",benefits:["Brain health","Heart protection","Anti-inflammatory","Vision support"],color:"#4a6a8a"},
+  {id:"ig34",name:"Shrimp",korean:"새우",emoji:"🦐",category:"seafood",keyNutrient:"Selenium & B12",benefits:["Thyroid health","Anti-aging","Brain function","Bone strength"],color:"#e08a6a"},
+  {id:"ig35",name:"Squid",korean:"오징어",emoji:"🦑",category:"seafood",keyNutrient:"Protein & Copper",benefits:["Blood health","Immune support","Low fat protein","Rich in minerals"],color:"#8a6a7a"},
+  {id:"ig36",name:"Clam",korean:"조개",emoji:"🦪",category:"seafood",keyNutrient:"Iron & B12",benefits:["Fights anemia","Nervous system health","Energy boost","Heart health"],color:"#9a8878"},
+  {id:"ig37",name:"Oyster",korean:"굴",emoji:"🦪",category:"seafood",keyNutrient:"Zinc & B12",benefits:["Immune powerhouse","Skin health","Hormone balance","Brain function"],color:"#7a8878"},
+  {id:"ig38",name:"Octopus",korean:"문어",emoji:"🐙",category:"seafood",keyNutrient:"B12 & Iron",benefits:["Brain health","Fights fatigue","Heart protection","Rich in taurine"],color:"#8a4a5a"},
+  {id:"ig39",name:"Anchovy",korean:"멸치",emoji:"🐟",category:"seafood",keyNutrient:"Calcium & Omega-3",benefits:["Bone strength","Heart health","Brain development","Rich in protein"],color:"#6a7a8a"},
+  {id:"ig40",name:"Kimchi",korean:"김치",emoji:"🥬",category:"fermented",keyNutrient:"Probiotics & Vitamin C",benefits:["Gut microbiome health","Immune boost","Anti-aging","Weight management"],color:"#c44a2a"},
+  {id:"ig41",name:"Doenjang",korean:"된장",emoji:"🫘",category:"fermented",keyNutrient:"Probiotics & Isoflavones",benefits:["Cancer prevention","Gut health","Protein source","Antioxidant"],color:"#8a6a3a"},
+  {id:"ig42",name:"Gochujang",korean:"고추장",emoji:"🌶️",category:"fermented",keyNutrient:"Capsaicin & Probiotics",benefits:["Metabolism boost","Gut health","Anti-inflammatory","Fat burning"],color:"#a42a1a"},
+  {id:"ig43",name:"Garlic",korean:"마늘",emoji:"🧄",category:"spice",keyNutrient:"Allicin",benefits:["Natural antibiotic","Heart protection","Immune booster","Cancer prevention"],color:"#d8c8a8"},
+  {id:"ig44",name:"Ginger",korean:"생강",emoji:"🫚",category:"spice",keyNutrient:"Gingerol",benefits:["Anti-nausea","Reduces muscle pain","Anti-inflammatory","Aids digestion"],color:"#c4a44a"},
+  {id:"ig45",name:"Sesame Seeds",korean:"참깨",emoji:"🌰",category:"spice",keyNutrient:"Calcium & Lignans",benefits:["Bone health","Hormone balance","Heart protection","Anti-aging"],color:"#c4a868"},
+  {id:"ig46",name:"Red Pepper Flakes",korean:"고춧가루",emoji:"🌶️",category:"spice",keyNutrient:"Capsaicin & Vitamin A",benefits:["Pain relief","Metabolism boost","Rich in vitamin C","Antibacterial"],color:"#b42a1a"},
+  {id:"ig47",name:"Sesame Oil",korean:"참기름",emoji:"🫒",category:"spice",keyNutrient:"Vitamin E & Sesamol",benefits:["Anti-aging skin care","Heart protection","Anti-inflammatory","Rich in antioxidants"],color:"#9a8a3a"},
+  {id:"ig48",name:"Ginseng",korean:"인삼",emoji:"🌿",category:"special",keyNutrient:"Ginsenosides",benefits:["Energy & stamina","Stress reduction","Immune boost","Cognitive function"],color:"#8a7a4a"},
+  {id:"ig49",name:"Rice",korean:"쌀",emoji:"🍚",category:"grain",keyNutrient:"B Vitamins & Energy",benefits:["Sustained energy","Gluten-free","Easy digestion","Brain fuel"],color:"#e8dcc0"},
+  {id:"ig50",name:"Glass Noodles",korean:"당면",emoji:"🍜",category:"grain",keyNutrient:"Iron & Complex Carbs",benefits:["Sustained energy","Gluten-free","Low fat","Mineral source"],color:"#c8b898"},
+  {id:"ig51",name:"Pear",korean:"배",emoji:"🍐",category:"fruit",keyNutrient:"Fiber & Vitamin C",benefits:["Digestive health","Natural meat tenderizer","Hangover remedy","Cooling effect"],color:"#b8a84a"},
+  {id:"ig52",name:"Jujube",korean:"대추",emoji:"🫐",category:"special",keyNutrient:"Vitamin C & Antioxidants",benefits:["Sleep quality","Stress relief","Digestive health","Immune support"],color:"#8a3a2a"},
+  {id:"ig53",name:"Acorn Jelly",korean:"도토리묵",emoji:"🟤",category:"special",keyNutrient:"Tannins & Fiber",benefits:["Detoxification","Weight management","Blood sugar control","Anti-fatigue"],color:"#7a6a5a"},
+  {id:"ig54",name:"Perilla Oil",korean:"들기름",emoji:"🫒",category:"spice",keyNutrient:"Alpha-linolenic (ALA)",benefits:["Brain health","Omega-3 source","Heart protection","Anti-inflammatory"],color:"#6a7a3a"},
+  {id:"ig55",name:"Mustard Greens",korean:"갓",emoji:"🥬",category:"vegetable",keyNutrient:"Glucosinolates",benefits:["Cancer prevention","Detoxification","Anti-inflammatory","Rich in vitamin K"],color:"#3a6a2d"},
+];
+
 // HELPERS
 function pickRandom(arr,n){const c=[...arr],r=[];for(let i=0;i<n&&c.length;i++){r.push(c.splice(Math.floor(Math.random()*c.length),1)[0]);}return r;}
 
@@ -270,6 +328,7 @@ const MONTH_KO=["January","February","March","April","May","June","July","August
 const DAY_KO=["S","M","T","W","T","F","S"];
 const STORAGE_DISHES="kmp-dishes-en-v1";
 const STORAGE_PLANS="kmp-plans-en-v1";
+const STORAGE_INGREDIENTS="kmp-ingredients-en-v1";
 
 // localStorage-backed persistence (replaces window.storage)
 async function loadStore(key){try{const r=localStorage.getItem(key);if(r)return JSON.parse(r);}catch(e){}return null;}
@@ -652,12 +711,221 @@ function MonthlyPlanner({namulList,banchanList,mainList}){
   );
 }
 
+function findDishesForIngredient(ing,namulList,banchanList,mainList){
+  const terms=[ing.name.toLowerCase()];
+  const n=ing.name.toLowerCase();
+  if(n.endsWith("s")&&!n.endsWith("ss"))terms.push(n.slice(0,-1));
+  const matches=d=>d.ingredients.some(i=>{const lo=i.toLowerCase();return terms.some(t=>lo.includes(t));});
+  return{namul:namulList.filter(matches),banchan:banchanList.filter(matches),main:mainList.filter(matches)};
+}
+
+function AddIngredientForm({onAdd,onClose}){
+  const[form,setForm]=useState({name:"",korean:"",emoji:"🌿",keyNutrient:"",benefitsRaw:"",color:"#3a7a3a"});
+  const[error,setError]=useState("");
+  const handleSubmit=()=>{
+    if(!form.name.trim()){setError("Please enter a name.");return;}
+    if(!form.benefitsRaw.trim()){setError("Please enter at least one benefit.");return;}
+    const benefits=form.benefitsRaw.split("\n").map(s=>s.trim()).filter(Boolean);
+    onAdd({id:genId("ig"),name:form.name.trim(),korean:form.korean.trim(),emoji:form.emoji||"🌿",category:"custom",keyNutrient:form.keyNutrient.trim(),benefits,color:form.color,custom:true});
+    onClose();
+  };
+  const inp={width:"100%",boxSizing:"border-box",border:"1.5px solid #e5e7eb",borderRadius:8,padding:"9px 11px",fontSize:14,fontFamily:"inherit",outline:"none",marginTop:4};
+  return(
+    <div style={{background:"#fff",border:"2px solid #15803d",borderRadius:12,padding:16,marginBottom:14}}>
+      <div style={{fontWeight:700,fontSize:14,marginBottom:12,color:"#15803d"}}>+ Add Ingredient</div>
+      {[["Name *","name"],["Korean","korean"],["Emoji","emoji"],["Key Nutrient","keyNutrient"]].map(p=>(
+        <div key={p[1]} style={{marginBottom:9}}>
+          <label style={{fontSize:11,fontWeight:700,color:"#374151"}}>{p[0]}</label>
+          <input style={inp} value={form[p[1]]} onChange={e=>{const v=e.target.value;setForm(pr=>({...pr,[p[1]]:v}));}}/>
+        </div>
+      ))}
+      <div style={{marginBottom:9}}>
+        <label style={{fontSize:11,fontWeight:700,color:"#374151"}}>Card Color</label>
+        <input type="color" value={form.color} onChange={e=>setForm(p=>({...p,color:e.target.value}))} style={{width:48,height:32,border:"none",borderRadius:6,cursor:"pointer",marginTop:4,display:"block"}}/>
+      </div>
+      <div style={{marginBottom:12}}>
+        <label style={{fontSize:11,fontWeight:700,color:"#374151"}}>Health Benefits * (one per line)</label>
+        <textarea style={{...inp,minHeight:70,resize:"vertical"}} value={form.benefitsRaw} onChange={e=>setForm(p=>({...p,benefitsRaw:e.target.value}))}/>
+      </div>
+      {error?<div style={{fontSize:12,color:"#dc2626",marginBottom:8}}>{error}</div>:null}
+      <div style={{display:"flex",gap:8}}>
+        <button onClick={handleSubmit} style={{background:"#15803d",color:"#fff",border:"none",borderRadius:8,padding:"9px 18px",fontWeight:700,fontSize:13,cursor:"pointer"}}>Save</button>
+        <button onClick={onClose} style={{background:"#f3f4f6",color:"#374151",border:"none",borderRadius:8,padding:"9px 14px",fontWeight:600,fontSize:13,cursor:"pointer"}}>Cancel</button>
+      </div>
+    </div>
+  );
+}
+
+function FoodMedicineTab({ingredientList,namulList,banchanList,mainList,onAdd,onDelete}){
+  const[flippedId,setFlippedId]=useState(null);
+  const[selectedIng,setSelectedIng]=useState(null);
+  const[showAdd,setShowAdd]=useState(false);
+  const[cols,setCols]=useState(8);
+  const gridRef=useRef(null);
+  const detailRef=useRef(null);
+
+  useEffect(()=>{
+    const update=()=>{const w=window.innerWidth;setCols(w<420?4:w<600?5:w<800?6:w<1024?7:8);};
+    update();window.addEventListener("resize",update);return()=>window.removeEventListener("resize",update);
+  },[]);
+
+  const handleMouseMove=useCallback((e)=>{
+    const grid=gridRef.current;if(!grid)return;
+    const rect=grid.getBoundingClientRect();
+    const mx=e.clientX-rect.left,my=e.clientY-rect.top;
+    const cards=grid.querySelectorAll("[data-ing]");
+    cards.forEach(card=>{
+      const cr=card.getBoundingClientRect();
+      const cx=cr.left-rect.left+cr.width/2,cy=cr.top-rect.top+cr.height/2;
+      const dist=Math.hypot(mx-cx,my-cy);
+      const radius=150,t=Math.max(0,1-dist/radius);
+      const scale=0.82+0.58*t;
+      card.style.transform="scale("+scale.toFixed(3)+")";
+      card.style.zIndex=String(Math.round(t*10));
+    });
+  },[]);
+
+  const handleMouseLeave=useCallback(()=>{
+    const cards=gridRef.current&&gridRef.current.querySelectorAll("[data-ing]");
+    if(cards)cards.forEach(card=>{card.style.transform="scale(1)";card.style.zIndex="0";});
+  },[]);
+
+  const handleCardClick=useCallback((ing)=>{
+    if(selectedIng&&selectedIng.id===ing.id){setSelectedIng(null);setFlippedId(null);}
+    else{setSelectedIng(ing);setFlippedId(ing.id);setTimeout(()=>{if(detailRef.current)detailRef.current.scrollIntoView({behavior:"smooth",block:"start"});},350);}
+  },[selectedIng]);
+
+  const matched=selectedIng?findDishesForIngredient(selectedIng,namulList,banchanList,mainList):null;
+  const totalMatched=matched?matched.namul.length+matched.banchan.length+matched.main.length:0;
+
+  const rows=[];
+  for(let i=0;i<ingredientList.length;i+=cols)rows.push(ingredientList.slice(i,Math.min(i+cols,ingredientList.length)));
+  const CARD=cols<=4?66:cols<=5?72:80;
+  const GAP=cols<=4?6:10;
+
+  return(
+    <div style={{padding:"14px 14px 0"}}>
+      <style>{[
+        ".ing-flip-inner{transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;width:100%;height:100%;position:relative;}",
+        ".ing-flip-inner.flipped{transform:rotateY(180deg);}",
+        ".ing-flip-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}",
+        ".ing-flip-back{transform:rotateY(180deg);}",
+      ].join("\n")}</style>
+
+      <div style={{background:"linear-gradient(135deg,#f0fdf4,#fff7ed)",borderRadius:16,padding:"20px 16px",marginBottom:18,boxShadow:"0 2px 12px rgba(0,0,0,0.06)",textAlign:"center"}}>
+        <div style={{fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:"0.12em",color:"#15803d",marginBottom:4}}>Discover</div>
+        <div style={{fontSize:26,fontWeight:900,color:"#1a1a1a",marginBottom:6,lineHeight:1.2}}>Food is Medicine</div>
+        <div style={{fontSize:13,color:"#6b7280",lineHeight:1.5,maxWidth:420,margin:"0 auto 12px"}}>Every ingredient heals. Hover to explore, tap to discover nutrients, and find Korean dishes that nourish your body.</div>
+        <div style={{display:"flex",gap:6,justifyContent:"center",flexWrap:"wrap"}}>
+          {[{l:"Anti-aging",c:"#c2410c"},{l:"Immunity",c:"#15803d"},{l:"Gut Health",c:"#7c3aed"},{l:"Brain Health",c:"#1d4ed8"},{l:"Anti-inflammatory",c:"#b45309"}].map(cat=>(
+            <span key={cat.l} style={{fontSize:9,fontWeight:700,padding:"3px 10px",borderRadius:99,background:cat.c+"18",color:cat.c,letterSpacing:"0.04em"}}>{cat.l}</span>
+          ))}
+        </div>
+      </div>
+
+      <div ref={gridRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}
+        style={{display:"flex",flexDirection:"column",alignItems:"center",gap:0,padding:"10px 0 20px",position:"relative",cursor:"default"}}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:"100%",height:"100%",borderRadius:"50%",background:"radial-gradient(circle,rgba(21,128,61,0.04) 0%,rgba(21,128,61,0.02) 40%,transparent 70%)",pointerEvents:"none"}}/>
+        {rows.map((row,ri)=>(
+          <div key={ri} style={{display:"flex",justifyContent:"center",gap:GAP,marginLeft:ri%2===1?(CARD+GAP)/2:0,marginTop:ri>0?-4:0,position:"relative"}}>
+            {row.map(ing=>{
+              const isFlipped=flippedId===ing.id;
+              const isSel=selectedIng&&selectedIng.id===ing.id;
+              return(
+                <div key={ing.id} data-ing onClick={()=>handleCardClick(ing)}
+                  style={{width:CARD,height:CARD,perspective:800,cursor:"pointer",transition:"transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",flexShrink:0}}>
+                  <div className={"ing-flip-inner"+(isFlipped?" flipped":"")}>
+                    <div className="ing-flip-face" style={{
+                      background:"radial-gradient(circle at 30% 25%,"+ing.color+"66,"+ing.color+"dd)",
+                      boxShadow:isSel?"0 0 0 3px #15803d,0 4px 16px "+ing.color+"88":"0 2px 10px "+ing.color+"55,inset 0 1px 2px rgba(255,255,255,0.25)",
+                      border:"2px solid "+(isSel?"#15803d":ing.color+"aa"),
+                    }}>
+                      <span style={{fontSize:CARD*0.38,filter:"drop-shadow(0 2px 3px rgba(0,0,0,0.25))"}}>{ing.emoji}</span>
+                      <span style={{fontSize:CARD<=66?7:8,fontWeight:700,color:"#fff",textShadow:"0 1px 3px rgba(0,0,0,0.6)",marginTop:2,lineHeight:1,textAlign:"center",padding:"0 4px",maxWidth:"92%",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ing.name}</span>
+                      <span style={{fontSize:CARD<=66?5:6,color:"rgba(255,255,255,0.85)",textShadow:"0 1px 2px rgba(0,0,0,0.5)",marginTop:1,textAlign:"center",padding:"0 3px",lineHeight:1}}>{ing.keyNutrient}</span>
+                    </div>
+                    <div className="ing-flip-face ing-flip-back" style={{
+                      background:"radial-gradient(circle at 70% 75%,"+ing.color+"cc,"+ing.color+"ee)",
+                      boxShadow:"0 0 0 3px #15803d,0 4px 16px "+ing.color+"88",
+                      border:"2px solid #15803d",padding:6,
+                    }}>
+                      <span style={{fontSize:CARD<=66?6.5:7.5,fontWeight:700,color:"#fff",textShadow:"0 1px 2px rgba(0,0,0,0.5)",textAlign:"center",lineHeight:1.4}}>
+                        {ing.benefits.slice(0,3).map((b,i)=><span key={i}>{(i>0?" · ":"")}{b}</span>)}
+                      </span>
+                      <span style={{fontSize:CARD<=66?6:7,color:"rgba(255,255,255,0.8)",marginTop:3}}>{"tap for dishes"}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+
+      {selectedIng&&matched?(
+        <div ref={detailRef} style={{background:"#fff",borderRadius:16,padding:20,marginBottom:16,boxShadow:"0 2px 16px rgba(0,0,0,0.08)",border:"2px solid #15803d22",animation:"slideUp 0.3s ease-out"}}>
+          <style>{"@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}"}</style>
+          <div style={{display:"flex",alignItems:"center",gap:14,marginBottom:16}}>
+            <div style={{width:56,height:56,borderRadius:"50%",background:"radial-gradient(circle at 30% 30%,"+selectedIng.color+"55,"+selectedIng.color+"cc)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:30,flexShrink:0,boxShadow:"0 2px 10px "+selectedIng.color+"44"}}>{selectedIng.emoji}</div>
+            <div style={{flex:1}}>
+              <div style={{fontSize:20,fontWeight:800,color:"#111"}}>{selectedIng.name} <span style={{fontSize:14,fontWeight:400,color:"#9ca3af"}}>{selectedIng.korean}</span></div>
+              <div style={{fontSize:13,fontWeight:700,color:"#15803d"}}>{selectedIng.keyNutrient}</div>
+            </div>
+            <div style={{display:"flex",gap:6,flexShrink:0}}>
+              {selectedIng.custom?<button onClick={(e)=>{e.stopPropagation();onDelete(selectedIng.id);setSelectedIng(null);setFlippedId(null);}} style={{background:"#fee2e2",color:"#dc2626",border:"none",borderRadius:8,padding:"6px 12px",fontWeight:700,fontSize:11,cursor:"pointer"}}>Delete</button>:null}
+              <button onClick={()=>{setSelectedIng(null);setFlippedId(null);}} style={{background:"#f3f4f6",border:"none",borderRadius:8,padding:"6px 14px",cursor:"pointer",fontSize:12,fontWeight:600}}>Close</button>
+            </div>
+          </div>
+
+          <div style={{marginBottom:18}}>
+            <div style={{fontSize:10,fontWeight:700,textTransform:"uppercase",color:"#9ca3af",letterSpacing:"0.08em",marginBottom:8}}>Health Benefits</div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+              {selectedIng.benefits.map((b,i)=>(
+                <span key={i} style={{fontSize:12,padding:"5px 12px",borderRadius:99,background:"#f0fdf4",color:"#15803d",fontWeight:600,border:"1px solid #15803d22"}}>{"✦ "+b}</span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div style={{fontSize:10,fontWeight:700,textTransform:"uppercase",color:"#9ca3af",letterSpacing:"0.08em",marginBottom:8}}>
+              {"Korean Dishes with "+selectedIng.name+" ("+totalMatched+")"}
+            </div>
+            {[{label:"Namul",dishes:matched.namul,color:"#15803d"},{label:"Banchan",dishes:matched.banchan,color:"#1d4ed8"},{label:"Main / Soup",dishes:matched.main,color:"#c2410c"}].map(sec=>sec.dishes.length>0?(
+              <div key={sec.label} style={{marginBottom:10}}>
+                <div style={{fontSize:11,fontWeight:700,color:sec.color,marginBottom:5}}>{sec.label+" ("+sec.dishes.length+")"}</div>
+                <div style={{display:"flex",flexWrap:"wrap",gap:5}}>
+                  {sec.dishes.map(d=>(
+                    <div key={d.id} style={{display:"inline-flex",alignItems:"center",gap:5,fontSize:12,background:"#f8f5f0",borderRadius:8,padding:"6px 11px",border:"1px solid #e8e0d4"}}>
+                      <span style={{fontWeight:600}}>{d.name}</span>
+                      <span style={{fontSize:10,color:"#9ca3af"}}>{d.romanized}</span>
+                      {d.maangchi?<MaangchiLink slug={d.maangchi}/>:null}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ):null)}
+            {totalMatched===0?<div style={{fontSize:13,color:"#9ca3af",padding:"12px 0",textAlign:"center"}}>No dishes found with this ingredient yet. Add one in the Recipe List tab.</div>:null}
+          </div>
+        </div>
+      ):null}
+
+      <div style={{display:"flex",justifyContent:"center",marginBottom:16}}>
+        <button onClick={()=>setShowAdd(!showAdd)} style={{background:"#15803d",color:"#fff",border:"none",borderRadius:10,padding:"10px 22px",fontWeight:700,fontSize:13,cursor:"pointer"}}>
+          {showAdd?"Cancel":"+ Add Ingredient"}
+        </button>
+      </div>
+      {showAdd?<AddIngredientForm onAdd={onAdd} onClose={()=>setShowAdd(false)}/>:null}
+    </div>
+  );
+}
+
 export default function KoreanMealPlanner(){
   const[loaded,setLoaded]=useState(false);
   const[namulList,setNamulList]=useState(SEED_NAMUL);
   const[banchanList,setBanchanList]=useState(SEED_BANCHAN);
   const[mainList,setMainList]=useState(SEED_MAIN);
-  const[tab,setTab]=useState("generate");
+  const[ingredientList,setIngredientList]=useState(SEED_INGREDIENTS);
+  const[tab,setTab]=useState("medicine");
   const[meal,setMeal]=useState(null);
   const[showGrocery,setShowGrocery]=useState(false);
   const[copied,setCopied]=useState(false);
@@ -671,12 +939,13 @@ export default function KoreanMealPlanner(){
   const buildRef=useRef(null);
 
   useEffect(()=>{
-    loadStore(STORAGE_DISHES).then(saved=>{
+    Promise.all([loadStore(STORAGE_DISHES),loadStore(STORAGE_INGREDIENTS)]).then(([saved,savedIng])=>{
       if(saved){
         if(saved.namul&&saved.namul.length)setNamulList(saved.namul);
         if(saved.banchan&&saved.banchan.length)setBanchanList(saved.banchan);
         if(saved.main&&saved.main.length)setMainList(saved.main);
       }
+      if(savedIng&&savedIng.length)setIngredientList(savedIng);
       setLoaded(true);
     });
   },[]);
@@ -685,6 +954,11 @@ export default function KoreanMealPlanner(){
     if(!loaded)return;
     saveStore(STORAGE_DISHES,{namul:namulList,banchan:banchanList,main:mainList});
   },[namulList,banchanList,mainList,loaded]);
+
+  useEffect(()=>{
+    if(!loaded)return;
+    saveStore(STORAGE_INGREDIENTS,ingredientList);
+  },[ingredientList,loaded]);
 
   const addDish=useCallback((cat,dish)=>{
     if(cat==="namul")setNamulList(p=>[...p,dish]);
@@ -787,7 +1061,7 @@ export default function KoreanMealPlanner(){
 
   if(!loaded)return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#9ca3af",fontFamily:"sans-serif"}}>{"Loading..."}</div>;
 
-  const tabs=[["generate","Auto Generate"],["manual","Pick Dishes"],["monthly","Monthly Plan"],["browse","Recipe List"]];
+  const tabs=[["medicine","Food is Medicine"],["generate","Auto Generate"],["manual","Pick Dishes"],["monthly","Monthly Plan"],["browse","Recipe List"]];
 
   return(
     <div style={{fontFamily:"'Noto Sans KR','Apple SD Gothic Neo',sans-serif",minHeight:"100vh",background:"#f8f5f0",paddingBottom:48}}>
@@ -798,11 +1072,13 @@ export default function KoreanMealPlanner(){
       <div style={{display:"flex",background:"#fff",borderBottom:"2px solid #e5e7eb",padding:"0 14px",overflowX:"auto"}}>
         {tabs.map(t=>(
           <button key={t[0]} onClick={()=>setTab(t[0])}
-            style={{padding:"13px 12px",fontSize:24,fontWeight:tab===t[0]?700:400,color:tab===t[0]?"#c2410c":"#6b7280",border:"none",background:"none",borderBottom:tab===t[0]?"3px solid #c2410c":"3px solid transparent",cursor:"pointer",marginBottom:-2,whiteSpace:"nowrap"}}>
+            style={{padding:"13px 10px",fontSize:14,fontWeight:tab===t[0]?700:500,color:tab===t[0]?"#c2410c":"#6b7280",border:"none",background:"none",borderBottom:tab===t[0]?"3px solid #c2410c":"3px solid transparent",cursor:"pointer",marginBottom:-2,whiteSpace:"nowrap"}}>
             {t[1]}
           </button>
         ))}
       </div>
+
+      {tab==="medicine"?<FoodMedicineTab ingredientList={ingredientList} namulList={namulList} banchanList={banchanList} mainList={mainList} onAdd={ing=>setIngredientList(p=>[...p,ing])} onDelete={id=>setIngredientList(p=>p.filter(i=>i.id!==id))}/>:null}
 
       {tab==="generate"?(
         <div style={{padding:"14px 14px 0"}}>
