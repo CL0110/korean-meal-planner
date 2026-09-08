@@ -919,6 +919,123 @@ function FoodMedicineTab({ingredientList,namulList,banchanList,mainList,onAdd,on
   );
 }
 
+function RecipeListTab({namulList,banchanList,mainList,addDish,deleteDish}){
+  const[search,setSearch]=useState("");
+  const[activeCategory,setActiveCategory]=useState("all");
+  const[expandedDish,setExpandedDish]=useState(null);
+  const[addingTo,setAddingTo]=useState(null);
+
+  const allDishes=[
+    ...namulList.map(d=>({...d,category:"namul"})),
+    ...banchanList.map(d=>({...d,category:"banchan"})),
+    ...mainList.map(d=>({...d,category:"main"})),
+  ];
+
+  const filtered=allDishes.filter(d=>{
+    if(activeCategory!=="all"&&d.category!==activeCategory)return false;
+    if(!search.trim())return true;
+    const q=search.toLowerCase();
+    const haystack=(d.name+" "+d.romanized+" "+(d.desc||"")+" "+d.ingredients.join(" ")).toLowerCase();
+    return q.split(/\s+/).every(w=>haystack.includes(w));
+  });
+
+  const catLabel=c=>c==="namul"?"Namul":c==="banchan"?"Banchan":"Main/Soup";
+  const catColor=c=>c==="namul"?"#15803d":c==="banchan"?"#1d4ed8":"#c2410c";
+
+  return(
+    <div style={{padding:"14px 14px 0"}}>
+      <div style={{background:"#fff",borderRadius:14,padding:"16px 16px 14px",marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.06)"}}>
+        <div style={{position:"relative",marginBottom:12}}>
+          <span style={{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",fontSize:16,color:"#9ca3af",pointerEvents:"none"}}>{"🔍"}</span>
+          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder={"Search by dish, ingredient, or keyword..."}
+            style={{width:"100%",boxSizing:"border-box",border:"2px solid #e5e7eb",borderRadius:12,padding:"12px 14px 12px 40px",fontSize:15,fontFamily:"inherit",outline:"none",background:"#fafaf8",transition:"border-color 0.2s"}}
+            onFocus={e=>{e.target.style.borderColor="#c2410c";}}
+            onBlur={e=>{e.target.style.borderColor="#e5e7eb";}}/>
+          {search?<button onClick={()=>setSearch("")} style={{position:"absolute",right:10,top:"50%",transform:"translateY(-50%)",background:"#e5e7eb",border:"none",borderRadius:"50%",width:22,height:22,cursor:"pointer",fontSize:12,color:"#6b7280",display:"flex",alignItems:"center",justifyContent:"center"}}>{"✕"}</button>:null}
+        </div>
+        <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+          {[["all","All Dishes"],["namul","Namul"],["banchan","Banchan"],["main","Main/Soup"]].map(([k,l])=>(
+            <button key={k} onClick={()=>setActiveCategory(k)}
+              style={{padding:"7px 16px",borderRadius:99,border:activeCategory===k?"2px solid "+(k==="all"?"#374151":catColor(k)):"2px solid #e5e7eb",background:activeCategory===k?(k==="all"?"#374151":catColor(k)):"#fff",color:activeCategory===k?"#fff":(k==="all"?"#374151":catColor(k)),fontWeight:700,fontSize:12,cursor:"pointer",transition:"all 0.2s"}}>
+              {l}{k!=="all"?" ("+(k==="namul"?namulList:k==="banchan"?banchanList:mainList).length+")":""}
+            </button>
+          ))}
+        </div>
+        <div style={{fontSize:12,color:"#9ca3af",marginTop:8}}>{filtered.length+" dish"+(filtered.length!==1?"es":"")+" found"}{search?" for \""+search+"\"":""}</div>
+      </div>
+
+      <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:14}}>
+        {["namul","banchan","main"].map(k=>(
+          <button key={k} onClick={()=>setAddingTo(addingTo===k?null:k)}
+            style={{padding:"7px 14px",borderRadius:8,border:"none",background:addingTo===k?"#fee2e2":"#fff",color:addingTo===k?"#dc2626":catColor(k),fontWeight:700,fontSize:12,cursor:"pointer",boxShadow:"0 1px 3px rgba(0,0,0,0.06)"}}>
+            {addingTo===k?"Cancel":"+ Add "+catLabel(k)}
+          </button>
+        ))}
+      </div>
+      {addingTo?<AddDishForm category={addingTo} onAdd={d=>addDish(addingTo,d)} onClose={()=>setAddingTo(null)}/>:null}
+
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(170px,1fr))",gap:10}}>
+        {filtered.map(d=>{
+          const thumbUrl=d.maangchi?"https://www.maangchi.com/wp-content/uploads/"+d.maangchi+"-590x332.jpg":null;
+          const isExpanded=expandedDish&&expandedDish.id===d.id;
+          return(
+            <div key={d.id+d.category} onClick={()=>setExpandedDish(isExpanded?null:d)}
+              style={{borderRadius:12,overflow:"hidden",cursor:"pointer",background:"#fff",boxShadow:isExpanded?"0 0 0 3px "+catColor(d.category)+",0 4px 16px rgba(0,0,0,0.12)":"0 2px 8px rgba(0,0,0,0.07)",transition:"box-shadow 0.2s, transform 0.2s",position:"relative"}}>
+              <div style={{width:"100%",aspectRatio:"16/11",background:"linear-gradient(135deg,"+catColor(d.category)+"22,"+catColor(d.category)+"44)",position:"relative",overflow:"hidden"}}>
+                {thumbUrl?(
+                  <img src={thumbUrl} alt={d.name}
+                    style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}}
+                    onError={e=>{e.target.style.display="none";e.target.nextSibling.style.display="flex";}}/>
+                ):null}
+                <div style={{display:thumbUrl?"none":"flex",width:"100%",height:"100%",alignItems:"center",justifyContent:"center",fontSize:42,position:"absolute",top:0,left:0,background:"linear-gradient(135deg,"+catColor(d.category)+"33,"+catColor(d.category)+"55)"}}>
+                  {dishEmoji(d)}
+                </div>
+                <div style={{position:"absolute",top:6,left:6}}>
+                  <span style={{fontSize:9,fontWeight:700,padding:"2px 8px",borderRadius:99,background:catColor(d.category),color:"#fff",textTransform:"uppercase",letterSpacing:"0.05em"}}>{catLabel(d.category)}</span>
+                </div>
+                {d.maangchi?(
+                  <a href={"https://www.maangchi.com/recipe/"+d.maangchi} target="_blank" rel="noopener noreferrer"
+                    onClick={e=>e.stopPropagation()}
+                    style={{position:"absolute",top:6,right:6,width:26,height:20,background:"#FF0000",borderRadius:4,display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",opacity:0.9}}>
+                    <span style={{display:"inline-block",width:0,height:0,borderTop:"4px solid transparent",borderBottom:"4px solid transparent",borderLeft:"7px solid #fff",marginLeft:1}}/>
+                  </a>
+                ):null}
+                <div style={{position:"absolute",bottom:0,left:0,right:0,height:"50%",background:"linear-gradient(transparent,rgba(0,0,0,0.7))"}}/>
+                <div style={{position:"absolute",bottom:6,left:8,right:8}}>
+                  <div style={{fontSize:13,fontWeight:800,color:"#fff",textShadow:"0 1px 4px rgba(0,0,0,0.6)",lineHeight:1.2,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{d.name}</div>
+                  <div style={{fontSize:10,color:"rgba(255,255,255,0.85)",textShadow:"0 1px 3px rgba(0,0,0,0.5)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{d.romanized}</div>
+                </div>
+              </div>
+              {isExpanded?(
+                <div style={{padding:"10px 10px 12px",borderTop:"2px solid "+catColor(d.category)+"33",animation:"slideUp 0.2s ease-out"}}>
+                  {d.desc?<div style={{fontSize:12,color:"#6b7280",marginBottom:8}}>{d.desc}</div>:null}
+                  <div style={{fontSize:10,fontWeight:700,color:"#9ca3af",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:5}}>Ingredients</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:3}}>
+                    {d.ingredients.map((ing,j)=>(
+                      <span key={j} style={{fontSize:11,background:"#f3f4f6",borderRadius:5,padding:"2px 7px",color:"#374151"}}>{ing}</span>
+                    ))}
+                  </div>
+                  {d.custom?(
+                    <button onClick={e=>{e.stopPropagation();deleteDish(d.category,d.id);setExpandedDish(null);}}
+                      style={{marginTop:8,background:"#fee2e2",color:"#dc2626",border:"none",borderRadius:8,padding:"5px 12px",fontWeight:700,fontSize:11,cursor:"pointer"}}>Delete</button>
+                  ):null}
+                </div>
+              ):null}
+            </div>
+          );
+        })}
+      </div>
+      {filtered.length===0?(
+        <div style={{textAlign:"center",padding:"40px 20px",color:"#9ca3af"}}>
+          <div style={{fontSize:36,marginBottom:8}}>{"🔍"}</div>
+          <div style={{fontSize:14,fontWeight:600}}>No dishes match your search</div>
+          <div style={{fontSize:12,marginTop:4}}>Try a different keyword like "tofu", "seafood", or "kimchi"</div>
+        </div>
+      ):null}
+    </div>
+  );
+}
+
 export default function KoreanMealPlanner(){
   const[loaded,setLoaded]=useState(false);
   const[namulList,setNamulList]=useState(SEED_NAMUL);
@@ -933,7 +1050,6 @@ export default function KoreanMealPlanner(){
   const[manualNonNamul,setManualNonNamul]=useState([]);
   const[manualMain,setManualMain]=useState(null);
   const[manualMeal,setManualMeal]=useState(null);
-  const[addingTo,setAddingTo]=useState(null);
   const banchanRef=useRef(null);
   const mainRef=useRef(null);
   const buildRef=useRef(null);
@@ -1001,27 +1117,10 @@ export default function KoreanMealPlanner(){
   const copyList=list=>{navigator.clipboard.writeText(list.map(x=>typeof x==="string"?x:x.ing).join("\n")).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});};
 
   const card={background:"#fff",borderRadius:12,padding:16,marginBottom:12,boxShadow:"0 1px 4px rgba(0,0,0,0.07)"};
-  const chip={display:"inline-block",fontSize:11,background:"#f3f4f6",borderRadius:6,padding:"2px 8px",margin:"2px 2px 2px 0",color:"#374151"};
-  const sLabel={fontSize:10,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase",color:"#9ca3af",marginBottom:5};
   const btnPrimary={display:"inline-flex",alignItems:"center",gap:5,padding:"10px 20px",borderRadius:8,border:"none",cursor:"pointer",fontWeight:700,fontSize:14,background:"#c2410c",color:"#fff"};
   const btnGhost={display:"inline-flex",alignItems:"center",gap:5,padding:"7px 14px",borderRadius:8,border:"none",cursor:"pointer",fontWeight:700,fontSize:12,background:"#f3f4f6",color:"#374151"};
   const btnGreen={display:"inline-flex",alignItems:"center",gap:5,padding:"10px 20px",borderRadius:8,border:"none",cursor:"pointer",fontWeight:700,fontSize:14,background:"#15803d",color:"#fff"};
-  const btnRed={display:"inline-flex",alignItems:"center",gap:5,padding:"3px 9px",borderRadius:8,border:"none",cursor:"pointer",fontWeight:700,fontSize:11,background:"#fee2e2",color:"#dc2626"};
 
-  const DishRow=({d,category,last})=>(
-    <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",padding:"9px 0",borderBottom:last?"none":"1px solid #f3f4f6"}}>
-      <div style={{flex:1}}>
-        <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginBottom:2}}>
-          <span style={{fontWeight:600,fontSize:14}}>{d.name}</span><span style={{color:"#9ca3af",fontSize:12}}>{d.romanized}</span>
-          {d.custom?<TAG label={"MINE"} color="purple"/>:null}
-          {d.maangchi?<MaangchiLink slug={d.maangchi}/>:null}
-        </div>
-        {d.desc?<div style={{fontSize:11,color:"#6b7280",marginBottom:3}}>{d.desc}</div>:null}
-        <div>{d.ingredients.map((ing,j)=><span key={j} style={chip}>{ing}</span>)}</div>
-      </div>
-      {d.custom?<button onClick={()=>deleteDish(category,d.id)} style={Object.assign({},btnRed,{marginLeft:8,marginTop:2})}>{"Delete"}</button>:null}
-    </div>
-  );
 
   const MealResult=({mealData})=>(
     <div style={card}>
@@ -1145,24 +1244,7 @@ export default function KoreanMealPlanner(){
 
       {tab==="monthly"?<MonthlyPlanner namulList={namulList} banchanList={banchanList} mainList={mainList}/>:null}
 
-      {tab==="browse"?(
-        <div style={{padding:"14px 14px 0"}}>
-          {[
-            {key:"namul",label:"Namul",list:namulList},
-            {key:"banchan",label:"Banchan",list:banchanList},
-            {key:"main",label:"Main/Soup",list:mainList}
-          ].map(sec=>(
-            <div key={sec.key} style={card}>
-              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
-                <span style={{fontWeight:700,fontSize:14}}>{sec.label+" ("+sec.list.length+")"}</span>
-                <button style={btnPrimary} onClick={()=>setAddingTo(addingTo===sec.key?null:sec.key)}>{addingTo===sec.key?"Close":"+ Add"}</button>
-              </div>
-              {addingTo===sec.key?<AddDishForm category={sec.key} onAdd={d=>addDish(sec.key,d)} onClose={()=>setAddingTo(null)}/>:null}
-              {sec.list.map((d,i)=><DishRow key={d.id} d={d} category={sec.key} last={i===sec.list.length-1}/>)}
-            </div>
-          ))}
-        </div>
-      ):null}
+      {tab==="browse"?<RecipeListTab namulList={namulList} banchanList={banchanList} mainList={mainList} addDish={addDish} deleteDish={deleteDish}/>:null}
       <div style={{textAlign:"center",marginTop:24}}>
         <button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} style={{fontSize:15,fontWeight:800,padding:"12px 26px",background:"#1a1a1a",color:"#fff",border:"none",borderRadius:10,cursor:"pointer"}}>{"↑ Back to Top"}</button>
       </div>
