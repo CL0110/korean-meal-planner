@@ -1029,16 +1029,22 @@ function RecipeListTab({namulList,banchanList,mainList,addDish,deleteDish}){
         {filtered.map(d=>{
           const isExpanded=expandedDish&&expandedDish.id===d.id;
           const g=dishCardGradient(d);
+          const photoSlug=d.maangchi||d.id;
           return(
             <div key={d.id+d.category} onClick={()=>setExpandedDish(isExpanded?null:d)}
               style={{borderRadius:14,overflow:"hidden",cursor:"pointer",background:"#fff",boxShadow:isExpanded?"0 0 0 3px "+catColor(d.category)+",0 8px 24px rgba(0,0,0,0.16)":"0 2px 12px rgba(0,0,0,0.08)",transition:"box-shadow 0.25s, transform 0.25s",position:"relative"}}>
               <div style={{width:"100%",aspectRatio:"16/11",background:"linear-gradient(145deg,"+g[0]+","+g[1]+")",position:"relative",overflow:"hidden"}}>
-                <div style={{position:"absolute",inset:0,color:"rgba(255,255,255,0.15)"}}>
-                  {dishSvg(d)}
-                </div>
-                <div style={{position:"absolute",top:"42%",left:"50%",transform:"translate(-50%,-50%)",width:72,height:72,borderRadius:"50%",background:"radial-gradient(circle,rgba(255,255,255,0.18) 0%,transparent 70%)"}}/>
-                <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",paddingBottom:20}}>
-                  <span style={{fontSize:52,filter:"drop-shadow(0 3px 10px rgba(0,0,0,0.3))"}}>{dishEmoji(d)}</span>
+                <img src={"/dishes/"+photoSlug+".jpg"} alt={d.name}
+                  style={{width:"100%",height:"100%",objectFit:"cover",position:"absolute",top:0,left:0}}
+                  onError={e=>{e.target.style.display="none";}}/>
+                <div className="card-fallback" style={{position:"absolute",inset:0}}>
+                  <div style={{position:"absolute",inset:0,color:"rgba(255,255,255,0.15)"}}>
+                    {dishSvg(d)}
+                  </div>
+                  <div style={{position:"absolute",top:"42%",left:"50%",transform:"translate(-50%,-50%)",width:72,height:72,borderRadius:"50%",background:"radial-gradient(circle,rgba(255,255,255,0.18) 0%,transparent 70%)"}}/>
+                  <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",paddingBottom:20}}>
+                    <span style={{fontSize:52,filter:"drop-shadow(0 3px 10px rgba(0,0,0,0.3))"}}>{dishEmoji(d)}</span>
+                  </div>
                 </div>
                 <div style={{position:"absolute",top:6,left:6}}>
                   <span style={{fontSize:9,fontWeight:700,padding:"2px 8px",borderRadius:99,background:"rgba(0,0,0,0.3)",backdropFilter:"blur(4px)",WebkitBackdropFilter:"blur(4px)",color:"#fff",textTransform:"uppercase",letterSpacing:"0.05em"}}>{catLabel(d.category)}</span>
